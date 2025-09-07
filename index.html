@@ -49,16 +49,25 @@
         transition: width 0.3s;
         overflow: hidden;
     }
-    .sidebar h2, .sidebar a {
-        white-space: nowrap;
+    .sidebar h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        color: #bbb;
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-size: 20px;
+        padding-bottom: 8px;
     }
-    .sidebar.collapsed {
-        width: 50px;
-        padding: 20px 5px;
+    .sidebar hr {
+        border: none;
+        border-top: 1px solid #222;
+        margin: 10px 0;
     }
-    .sidebar.collapsed h2,
-    .sidebar.collapsed a {
-        display: none;
+    .sidebar a {
+        display: block;
+        margin: 8px 0;
+        padding-left: 5px;
+        font-size: 15px;
+        color: #bbb;
     }
     .content {
         margin-left: 220px;
@@ -67,9 +76,6 @@
         background: #0d0d0d;
         padding-bottom: 80px;
         transition: margin-left 0.3s;
-    }
-    .content.expanded {
-        margin-left: 70px;
     }
     .card {
         background: #1a1a1a;
@@ -107,31 +113,43 @@
     }
     .toggle-btn {
         position: fixed;
-        top: 20px;
+        top: 10px;
         left: 210px;
         background: #222;
         color: #fff;
-        border: none;
-        padding: 6px 10px;
+        padding: 5px 10px;
+        border-radius: 5px;
         cursor: pointer;
-        border-radius: 4px;
         font-size: 14px;
+        z-index: 1000;
         transition: left 0.3s;
     }
-    .sidebar.collapsed + .toggle-btn {
-        left: 60px;
+    .collapsed .sidebar {
+        width: 60px;
+    }
+    .collapsed .content {
+        margin-left: 80px;
+    }
+    .collapsed .toggle-btn {
+        left: 70px;
+    }
+    .collapsed .sidebar h2,
+    .collapsed .sidebar a,
+    .collapsed .sidebar hr {
+        display: none;
     }
   </style>
 </head>
 <body>
   <div class="sidebar" id="sidebar">
     <h2>hxal.xyz</h2>
+    <hr>
     <a href="#">~/overall</a>
     <a href="#">~/project</a>
     <a href="https://discord.gg/H3E2QPsF" target="_blank">~/contact me</a>
   </div>
 
-  <button class="toggle-btn" id="toggleBtn">☰</button>
+  <div class="toggle-btn" id="toggleBtn">☰</div>
 
   <div class="content" id="content">
     <h1># Hey, I'm <b>Healing</b></h1>
@@ -185,13 +203,10 @@
   <div class="footer">© 2025 hxal.xyz Copyright Reserved</div>
 
   <script>
-    const sidebar = document.getElementById('sidebar');
-    const content = document.getElementById('content');
-    const toggleBtn = document.getElementById('toggleBtn');
-
-    toggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('collapsed');
-      content.classList.toggle('expanded');
+    const toggleBtn = document.getElementById("toggleBtn");
+    const body = document.body;
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("collapsed");
     });
   </script>
 </body>
