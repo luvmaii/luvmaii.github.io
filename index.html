@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Healing</title>
-  <!-- 把這張圖設為瀏覽器 tab 的小圖示 -->
   <link rel="icon" href="535fbeca-d140-40e5-9ddd-4748541af22e.png" type="image/png">
   <style>
     body {
@@ -50,26 +49,16 @@
         transition: width 0.3s;
         overflow: hidden;
     }
+    .sidebar h2, .sidebar a {
+        white-space: nowrap;
+    }
     .sidebar.collapsed {
-        width: 60px;
+        width: 50px;
+        padding: 20px 5px;
     }
-    .sidebar h2 {
-        margin-top: 0;
-        margin-bottom: 15px;
-        color: #bbb;
-        font-family: "Segoe UI", Arial, sans-serif;
-        font-size: 20px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid #222;
-        white-space: nowrap;
-    }
-    .sidebar a {
-        display: block;
-        margin: 12px 0;
-        padding-left: 5px;
-        font-size: 15px;
-        color: #bbb;
-        white-space: nowrap;
+    .sidebar.collapsed h2,
+    .sidebar.collapsed a {
+        display: none;
     }
     .content {
         margin-left: 220px;
@@ -80,7 +69,7 @@
         transition: margin-left 0.3s;
     }
     .content.expanded {
-        margin-left: 80px;
+        margin-left: 70px;
     }
     .card {
         background: #1a1a1a;
@@ -130,7 +119,7 @@
         transition: left 0.3s;
     }
     .sidebar.collapsed + .toggle-btn {
-        left: 70px;
+        left: 60px;
     }
   </style>
 </head>
