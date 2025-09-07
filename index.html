@@ -77,6 +77,28 @@
         padding-bottom: 80px;
         transition: margin-left 0.3s;
     }
+    .card {
+        background: #1a1a1a;
+        padding: 15px;
+        border-radius: 6px;
+        margin-top: 20px;
+    }
+    .card h3 {
+        margin-top: 0;
+    }
+    .specs {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-top: 1px solid #222;
+    }
+    .specs li {
+        margin: 0;
+        padding: 8px 0;
+        border-bottom: 1px solid #222;
+        font-size: 14px;
+        font-family: "Segoe UI", Arial, sans-serif;
+    }
     .footer {
         position: fixed;
         bottom: 0;
@@ -150,22 +172,28 @@
     <p><a href="https://e-z.bio/mai" target="_blank">https://e-z.bio/mai</a></p>
 
     <h2>## Performance</h2>
-    <p><b>CPU:</b> Intel i7</p>
-    <p><b>RAM:</b> 32GiB</p>
-    <p><b>Storage:</b> 1TB SSD</p>
-    <p><b>Display:</b> 144hz</p>
-    <p><b>Rank:</b> Peak Nemesis On Rivals</p>
+    <div class="card">
+      <ul class="specs">
+        <li><b>CPU:</b> Intel i7</li>
+        <li><b>RAM:</b> 32GiB</li>
+        <li><b>Storage:</b> 1TB SSD</li>
+        <li><b>Display:</b> 144hz</li>
+        <li><b>Rank:</b> Peak Nemesis On Rivals</li>
+      </ul>
+    </div>
 
     <h2>## My Works</h2>
     <p><a href="https://discord.gg/luvmaii" target="_blank">.gg/luvmaii</a> @ head dev</p>
     <p>Rivals KnR 群組領頭開發</p>
 
     <h2>## my projects</h2>
-    <p>Coming Soon</p>
-    <p>
+    <div class="card">
+      <h3>Coming Soon</h3>
+      <p>
         Projects showcase will be added here.  
         Check back soon or visit my <a href="https://github.com/19y7">GitHub</a> for now.
-    </p>
+      </p>
+    </div>
   </div>
 
   <div class="footer">© 2025 hxal.xyz Copyright Reserved</div>
@@ -179,3 +207,4 @@
   </script>
 </body>
 </html>
+
