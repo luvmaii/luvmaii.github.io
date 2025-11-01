@@ -37,6 +37,12 @@
         color: #4da6ff;
         text-decoration: none;
     }
+
+    p {
+        margin-left: 20px;
+        line-height: 1.6;
+    }
+
     .sidebar {
         position: fixed;
         top: 0;
@@ -124,19 +130,30 @@
         z-index: 1000;
         transition: left 0.3s;
     }
+
     .collapsed .sidebar {
-        width: 60px;
+        width: 5px;
     }
     .collapsed .content {
-        margin-left: 80px;
+        margin-left: 20px;
     }
     .collapsed .toggle-btn {
-        left: 70px;
+        left: 15px;
     }
     .collapsed .sidebar h2,
     .collapsed .sidebar a,
     .collapsed .sidebar hr {
         display: none;
+    }
+
+    .collapsed .content h1 {
+        margin-left: 10px;
+    }
+    .collapsed .content h2 {
+        margin-left: 15px;
+    }
+    .collapsed .content p {
+        margin-left: 25px;
     }
   </style>
 </head>
@@ -144,59 +161,66 @@
   <div class="sidebar" id="sidebar">
     <h2>hxal.xyz</h2>
     <hr>
-    <a href="#">~/overall</a>
-    <a href="#">~/project</a>
     <a href="https://discord.gg/H3E2QPsF" target="_blank">~/contact me</a>
   </div>
 
   <div class="toggle-btn" id="toggleBtn">☰</div>
 
   <div class="content" id="content">
-    <h1># Hey, I'm <b>Healing</b></h1>
+    <h1>Hey, I'm <b>i0vy</b>.</h1>
 
-    <h2>## who am i?</h2>
+    <h2>who am i?</h2>
     <p>
       I am a small discord developer and located in Taiwan,
       I enjoy learning about anything and I have some open source projects. 
       You can find my work on my <a href="https://github.com/luvmaii">GitHub</a>.
     </p>
 
-    <h2>## 我最喜歡的麻衣姐姐說的話</h2>
+    <h2>mai</h2>
     <p>
         あのね麻衣、多分麻衣が思ってるより、私麻衣のこと好きよ .<br>
         前に言ったでしょう。麻衣の思ってるより、私は麻衣のことが好きなのよ .<br>
         我最喜歡的人，成為最喜歡我的人。
     </p>
 
-    <h2>## My E-Z Bio !!</h2>
+    <h2>chitose</h2>
+    <p>
+        十月的尾聲<br>
+        跟我們之間不自然的關係很相似<br>
+        我想要完好的存在<br>
+        就像那天看見的月亮<br>
+        就像沉在彈珠汽水裡面的彈珠
+    </p>
+
+    <h2>my e-z bio</h2>
     <p><a href="https://e-z.bio/mai" target="_blank">https://e-z.bio/mai</a></p>
 
-    <h2>## Performance</h2>
+    <h2>performance</h2>
     <div class="card">
       <ul class="specs">
         <li><b>CPU:</b> Intel i7</li>
         <li><b>RAM:</b> 32GiB</li>
         <li><b>Storage:</b> 1TB SSD</li>
-        <li><b>Display:</b> 144hz</li>
-        <li><b>Rank:</b> Peak Nemesis On Rivals</li>
+        <li><b>Display:</b> 240hz</li>
+        <li><b>Rank:</b> nemesis on rivals, valorant gold</li>
       </ul>
     </div>
 
-    <h2>## My Works</h2>
-    <p><a href="https://discord.gg/luvmaii" target="_blank">.gg/luvmaii</a> @ head dev</p>
-    <p>Rivals KnR 群組領頭開發</p>
+    <h2>my works</h2>
+    <p><a href="https://discord.gg/xxEXdBJ4PV" target="_blank">.gg/luvmaii</a> @ founder, head dev</p>
+    <p><a href="https://discord.gg/Twd6B2EUeC" target="_blank">.gg/knontop</a> @ head dev</p>
 
-    <h2>## my projects</h2>
+    <h2>my projects</h2>
     <div class="card">
-      <h3>Coming Soon</h3>
+        <h3>Coming Soon</h3>
       <p>
         Projects showcase will be added here.  
-        Check back soon or visit my <a href="https://github.com/19y7">GitHub</a> for now.
+        Check back soon or visit my <a href="https://github.com/luvmaii">GitHub</a> for now.
       </p>
     </div>
   </div>
 
-  <div class="footer">© 2025 hxal.xyz Copyright Reserved</div>
+  <div class="footer">© 2025 <b>i0vy</b> Copyright Reserved.</div>
 
   <script>
     const toggleBtn = document.getElementById("toggleBtn");
@@ -207,4 +231,3 @@
   </script>
 </body>
 </html>
-
