@@ -1,175 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>i0vy</title>
-  <link rel="icon" href="535fbeca-d140-40e5-9ddd-4748541af22e.png" type="image/png">
-  <style>
-    body {
-        background-color: #0d0d0d;
-        color: #ccc;
-        font-family: "Segoe UI", Arial, sans-serif;
-        font-size: 15px;
-        margin: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i0vy</title>
+    <link rel="icon" href="535fbeca-d140-40e5-9ddd-4748541af22e.png" type="image/png">
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #ccc;
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 15px;
+            margin: 0;
+        }
+        h1, h2 {
+            font-family: monospace;
+            font-weight: normal;
+            color: #bbb;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        h2 {
+            font-size: 22px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #ccc;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+        a {
+            color: #4da6ff;
+            text-decoration: none;
+        }
+        p {
+            margin-left: 20px;
+            line-height: 1.6;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            background: #111;
+            padding: 20px;
+            border-right: 1px solid #222;
+            transition: width 0.3s;
+            overflow: hidden;
+        }
+        .sidebar h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #bbb;
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 20px;
+            padding-bottom: 8px;
+        }
+        .sidebar hr {
+            border: none;
+            border-top: 1px solid #222;
+            margin: 10px 0;
+        }
+        .sidebar a {
+            display: block;
+            margin: 8px 0;
+            padding-left: 5px;
+            font-size: 15px;
+            color: #bbb;
+        }
 
-    h1, h2 { font-family: monospace; font-weight: normal; color: #bbb; }
-    h1 { font-size: 28px; margin-bottom: 15px; }
-    h2 { font-size: 22px; margin-top: 25px; margin-bottom: 10px; }
-    h3 { font-size: 18px; margin-bottom: 10px; color: #ccc; }
-    a { color: #4da6ff; text-decoration: none; }
-    p { margin-left: 20px; line-height: 1.6; }
+        .content {
+            margin-left: 220px;
+            max-width: 800px;
+            padding: 40px;
+            background: #0d0d0d;
+            padding-bottom: 80px;
+            transition: margin-left 0.3s;
+        }
 
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200px;
-        height: 100%;
-        background: #111;
-        padding: 20px;
-        border-right: 1px solid #222;
-        transition: width 0.3s;
-        overflow: hidden;
-    }
-    .sidebar h2,
-    .sidebar hr,
-    .sidebar a {
-        transition: opacity 0.3s;
-    }
+        .card {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .specs {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border-top: 1px solid #222;
+        }
+        .specs li {
+            margin: 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+            font-size: 14px;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
 
-    .collapsed .sidebar {
-        width: 50px;
-        padding: 20px 10px;
-    }
-    .collapsed .sidebar h2,
-    .collapsed .sidebar hr,
-    .collapsed .sidebar a {
-        opacity: 0;
-        pointer-events: none;
-    }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            font-size: 13px;
+            color: #666;
+            background: #0d0d0d;
+            border-top: 1px solid #222;
+        }
 
-    .toggle-btn {
-        position: fixed;
-        top: 10px;
-        left: 210px;
-        background: #222;
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px;
-        z-index: 1000;
-        transition: left 0.3s;
-    }
-    .collapsed .toggle-btn {
-        left: 65px;
-    }
+        .toggle-btn {
+            position: fixed;
+            top: 10px;
+            left: 210px;
+            background: #222;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            transition: left 0.3s;
+        }
 
-    .content {
-        margin-left: 220px;
-        max-width: 800px;
-        padding: 40px;
-        transition: margin-left 0.3s;
-    }
-    .collapsed .content {
-        margin-left: 90px;
-    }
-
-    .card {
-        background: #1a1a1a;
-        padding: 15px;
-        border-radius: 6px;
-        margin-top: 20px;
-    }
-    .specs {
-        list-style: none;
-        padding: 0;
-        border-top: 1px solid #222;
-    }
-    .specs li {
-        padding: 8px 0;
-        border-bottom: 1px solid #222;
-        font-size: 14px;
-    }
-
-    .footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        font-size: 13px;
-        color: #666;
-        background: #0d0d0d;
-        border-top: 1px solid #222;
-    }
-</style>
+        .collapsed .sidebar {
+            width: 5px;
+        }
+        .collapsed .content {
+            margin-left: 20px;
+        }
+        .collapsed .toggle-btn {
+            left: 15px;
+        }
+        .collapsed .sidebar h2,
+        .collapsed .sidebar a,
+        .collapsed .sidebar hr {
+            display: none;
+        }
+        .collapsed .content h1 {
+            margin-left: 10px;
+        }
+        .collapsed .content h2 {
+            margin-left: 15px;
+        }
+        .collapsed .content p {
+            margin-left: 25px;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="sidebar" id="sidebar">
-    <div class="sidebar-btn">☰</div>
-    <h2>hxal.xyz</h2>
-    <hr>
-    <a href="https://discord.gg/H3E2QPsF" target="_blank">~/contact me</a>
-  </div>
-
-  <div class="content"" id="content">
-    <h1>Hey, I'm <b>i0vy</b>.</h1>
-
-    <h2>who am i?</h2>
-    <p>
-      I am a small discord developer and located in Taiwan,
-      I enjoy learning about anything and I have some open source projects.
-      
-    </p>
-
-    <h2>mai</h2>
-    <p>
-        あのね麻衣、多分麻衣が思ってるより、私麻衣のこと好きよ .<br>
-        前に言ったでしょう。麻衣の思ってるより、私は麻衣のことが好きなのよ .<br>
-        我最喜歡的人，成為最喜歡我的人。
-    </p>
-
-    <h2>chitose</h2>
-    <p>
-        十月的尾聲<br>
-        跟我們之間不自然的關係很相似<br>
-        我想要完好的存在<br>
-        就像那天看見的月亮<br>
-        就像沉在彈珠汽水裡面的彈珠
-    </p>
-
-    <h2>my e-z bio</h2>
-    <p><a href="https://e-z.bio/mai" target="_blank">https://e-z.bio/mai</a></p>
-
-    <h2>performance</h2>
-    <div class="card">
-      <ul class="specs">
-        <li><b>CPU:</b> Intel i7</li>
-        <li><b>RAM:</b> 32GiB</li>
-        <li><b>Storage:</b> 1TB SSD</li>
-        <li><b>Display:</b> 240hz</li>
-        <li><b>Rank:</b> nemesis on rivals, valorant gold</li>
-      </ul>
+    <div class="sidebar" id="sidebar">
+        <h2>hxal.xyz</h2>
+        <hr>
+        <a href="https://discord.gg/H3E2QPsF" target="_blank">~/contact me</a>
     </div>
 
-    <h2>my works</h2>
-    <p><a href="https://discord.gg/xxEXdBJ4PV" target="_blank">.gg/luvmaii</a> @ founder, head dev (1k+)</p>
-    <p><a href="https://discord.gg/Twd6B2EUeC" target="_blank">.gg/knontop</a> @ head dev (7k+)</p>
+    <div class="toggle-btn" id="toggleBtn">☰</div>
 
-    <h2>my projects</h2>
-    <div class="card">
-        <h3>Coming Soon</h3>
-      <p>
-        Projects showcase will be added here.
-        Check back soon or visit my <a href="https://github.com/luvmaii">GitHub</a> for now.
-      </p>
+    <div class="content" id="content">
+        <h1>Hey, I'm <b>i0vy</b>.</h1>
+
+        <h2>who am i?</h2>
+        <p>
+            I am a small discord developer and located in Taiwan, I enjoy learning about anything and I have some open source projects.
+            You can find my work on my <a href="https://github.com/luvmaii">GitHub</a>.
+        </p>
+
+        <h2>mai</h2>
+        <p>
+            あのね麻衣、多分麻衣が思ってるより、私麻衣のこと好きよ .<br>
+            前に言ったでしょう。麻衣の思ってるより、私は麻衣のことが好きなのよ .<br>
+            我最喜歡的人，成為最喜歡我的人。
+        </p>
+
+        <h2>chitose</h2>
+        <p>
+            十月的尾聲<br>
+            跟我們之間不自然的關係很相似<br>
+            我想要完好的存在<br>
+            就像那天看見的月亮<br>
+            就像沉在彈珠汽水裡面的彈珠
+        </p>
+
+        <h2>my e-z bio</h2>
+        <p><a href="https://e-z.bio/mai" target="_blank">https://e-z.bio/mai</a></p>
+
+        <h2>performance</h2>
+        <div class="card">
+            <ul class="specs">
+                <li><b>CPU:</b> Intel i7</li>
+                <li><b>RAM:</b> 32GiB</li>
+                <li><b>Storage:</b> 1TB SSD</li>
+                <li><b>Display:</b> 240hz</li>
+                <li><b>Rank:</b> nemesis on rivals, valorant gold</li>
+            </ul>
+        </div>
+
+        <h2>my works</h2>
+        <p><a href="https://discord.gg/xxEXdBJ4PV" target="_blank">.gg/luvmaii</a> @ founder, head dev (1k+)</p>
+        <p><a href="https://discord.gg/Twd6B2EUeC" target="_blank">.gg/knontop</a> @ head dev (7k+)</p>
+
+        <h2>my projects</h2>
+        <div class="card">
+            <h3>Coming Soon</h3>
+            <p>
+                Projects showcase will be added here. Check back soon or visit my
+                <a href="https://github.com/luvmaii">GitHub</a> for now.
+            </p>
+        </div>
     </div>
-  </div>
 
-  <div class="footer">© 2025 <b>i0vy</b> Copyright Reserved.</div>
+    <div class="footer">
+        © 2025 <b>i0vy</b> Copyright Reserved.
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById("toggleBtn");
+        const body = document.body;
+
+        toggleBtn.addEventListener("click", () => {
+            body.classList.toggle("collapsed");
+        });
+    </script>
 </body>
 </html>
