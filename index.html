@@ -13,98 +13,71 @@
         font-size: 15px;
         margin: 0;
     }
+
+    /* Sidebar collapsed version: only a button */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 50px;
+        height: 100%;
+        background: #111;
+        padding: 10px;
+        border-right: 1px solid #222;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+    }
+
+    /* Hide everything except the button */
+    .sidebar h2,
+    .sidebar a,
+    .sidebar hr {
+        display: none;
+    }
+
+    .sidebar-btn {
+        background: #222;
+        color: #fff;
+        padding: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        user-select: none;
+    }
+
+    .content {
+        margin-left: 80px;
+        max-width: 800px;
+        padding: 40px;
+        background: #0d0d0d;
+        padding-bottom: 80px;
+    }
+
     h1, h2 {
         font-family: monospace;
         font-weight: normal;
         color: #bbb;
     }
-    h1 {
-        font-size: 28px;
-        margin-bottom: 15px;
-    }
-    h2 {
-        font-size: 22px;
-        margin-top: 25px;
-        margin-bottom: 10px;
-    }
-    h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-        color: #ccc;
-        font-family: "Segoe UI", Arial, sans-serif;
-    }
-    a {
-        color: #4da6ff;
-        text-decoration: none;
-    }
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; }
+    h3 { font-size: 18px; color: #ccc; }
 
-    p {
-        margin-left: 20px;
-        line-height: 1.6;
-    }
+    a { color: #4da6ff; }
 
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200px;
-        height: 100%;
-        background: #111;
-        padding: 20px;
-        border-right: 1px solid #222;
-        transition: width 0.3s;
-        overflow: hidden;
-    }
-    .sidebar h2 {
-        margin-top: 0;
-        margin-bottom: 10px;
-        color: #bbb;
-        font-family: "Segoe UI", Arial, sans-serif;
-        font-size: 20px;
-        padding-bottom: 8px;
-    }
-    .sidebar hr {
-        border: none;
-        border-top: 1px solid #222;
-        margin: 10px 0;
-    }
-    .sidebar a {
-        display: block;
-        margin: 8px 0;
-        padding-left: 5px;
-        font-size: 15px;
-        color: #bbb;
-    }
-    .content {
-        margin-left: 220px;
-        max-width: 800px;
-        padding: 40px;
-        background: #0d0d0d;
-        padding-bottom: 80px;
-        transition: margin-left 0.3s;
-    }
+    p { margin-left: 20px; line-height: 1.6; }
+
     .card {
         background: #1a1a1a;
         padding: 15px;
         border-radius: 6px;
         margin-top: 20px;
     }
-    .card h3 {
-        margin-top: 0;
-    }
-    .specs {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        border-top: 1px solid #222;
-    }
-    .specs li {
-        margin: 0;
-        padding: 8px 0;
-        border-bottom: 1px solid #222;
-        font-size: 14px;
-        font-family: "Segoe UI", Arial, sans-serif;
-    }
+
+    .specs { list-style: none; padding: 0; border-top: 1px solid #222; }
+    .specs li { padding: 8px 0; border-bottom: 1px solid #222; font-size: 14px; }
+
     .footer {
         position: fixed;
         bottom: 0;
@@ -117,54 +90,12 @@
         background: #0d0d0d;
         border-top: 1px solid #222;
     }
-    .toggle-btn {
-        position: fixed;
-        top: 10px;
-        left: 210px;
-        background: #222;
-        color: #fff;
-        padding: 5px 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px;
-        z-index: 1000;
-        transition: left 0.3s;
-    }
-
-    .collapsed .sidebar {
-        width: 5px;
-    }
-    .collapsed .content {
-        margin-left: 20px;
-    }
-    .collapsed .toggle-btn {
-        left: 15px;
-    }
-    .collapsed .sidebar h2,
-    .collapsed .sidebar a,
-    .collapsed .sidebar hr {
-        display: none;
-    }
-
-    .collapsed .content h1 {
-        margin-left: 10px;
-    }
-    .collapsed .content h2 {
-        margin-left: 15px;
-    }
-    .collapsed .content p {
-        margin-left: 25px;
-    }
   </style>
 </head>
 <body>
   <div class="sidebar" id="sidebar">
-    <h2>hxal.xyz</h2>
-    <hr>
-    <a href="https://discord.gg/H3E2QPsF" target="_blank">~/contact me</a>
+    <div class="sidebar-btn">☰</div>
   </div>
-
-  <div class="toggle-btn" id="toggleBtn">☰</div>
 
   <div class="content" id="content">
     <h1>Hey, I'm <b>i0vy</b>.</h1>
@@ -172,8 +103,8 @@
     <h2>who am i?</h2>
     <p>
       I am a small discord developer and located in Taiwan,
-      I enjoy learning about anything and I have some open source projects. 
-      You can find my work on my <a href="https://github.com/luvmaii">GitHub</a>.
+      I enjoy learning about anything and I have some open source projects.
+      
     </p>
 
     <h2>mai</h2>
@@ -214,20 +145,12 @@
     <div class="card">
         <h3>Coming Soon</h3>
       <p>
-        Projects showcase will be added here.  
+        Projects showcase will be added here.
         Check back soon or visit my <a href="https://github.com/luvmaii">GitHub</a> for now.
       </p>
     </div>
   </div>
 
   <div class="footer">© 2025 <b>i0vy</b> Copyright Reserved.</div>
-
-  <script>
-    const toggleBtn = document.getElementById("toggleBtn");
-    const body = document.body;
-    toggleBtn.addEventListener("click", () => {
-      body.classList.toggle("collapsed");
-    });
-  </script>
 </body>
 </html>
