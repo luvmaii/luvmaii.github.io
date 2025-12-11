@@ -14,57 +14,68 @@
         margin: 0;
     }
 
+    h1, h2 { font-family: monospace; font-weight: normal; color: #bbb; }
+    h1 { font-size: 28px; margin-bottom: 15px; }
+    h2 { font-size: 22px; margin-top: 25px; margin-bottom: 10px; }
+    h3 { font-size: 18px; margin-bottom: 10px; color: #ccc; }
+    a { color: #4da6ff; text-decoration: none; }
+    p { margin-left: 20px; line-height: 1.6; }
+
     .sidebar {
         position: fixed;
         top: 0;
         left: 0;
-        width: 50px;
+        width: 200px;
         height: 100%;
         background: #111;
-        padding: 10px;
+        padding: 20px;
         border-right: 1px solid #222;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: start;
+        transition: width 0.3s;
+        overflow: hidden;
     }
-
     .sidebar h2,
-    .sidebar a,
-    .sidebar hr {
-        display: none;
+    .sidebar hr,
+    .sidebar a {
+        transition: opacity 0.3s;
     }
 
-    .sidebar-btn {
+    .collapsed .sidebar {
+        width: 50px;
+        padding: 20px 10px;
+    }
+    .collapsed .sidebar h2,
+    .collapsed .sidebar hr,
+    .collapsed .sidebar a {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .toggle-btn {
+        position: fixed;
+        top: 10px;
+        left: 210px;
         background: #222;
         color: #fff;
-        padding: 10px;
-        border-radius: 6px;
+        padding: 5px 10px;
+        border-radius: 5px;
         cursor: pointer;
-        font-size: 18px;
-        user-select: none;
+        font-size: 14px;
+        z-index: 1000;
+        transition: left 0.3s;
+    }
+    .collapsed .toggle-btn {
+        left: 65px;
     }
 
     .content {
-        margin-left: 80px;
+        margin-left: 220px;
         max-width: 800px;
         padding: 40px;
-        background: #0d0d0d;
-        padding-bottom: 80px;
+        transition: margin-left 0.3s;
     }
-
-    h1, h2 {
-        font-family: monospace;
-        font-weight: normal;
-        color: #bbb;
+    .collapsed .content {
+        margin-left: 90px;
     }
-    h1 { font-size: 28px; }
-    h2 { font-size: 22px; }
-    h3 { font-size: 18px; color: #ccc; }
-
-    a { color: #4da6ff; }
-
-    p { margin-left: 20px; line-height: 1.6; }
 
     .card {
         background: #1a1a1a;
@@ -72,9 +83,16 @@
         border-radius: 6px;
         margin-top: 20px;
     }
-
-    .specs { list-style: none; padding: 0; border-top: 1px solid #222; }
-    .specs li { padding: 8px 0; border-bottom: 1px solid #222; font-size: 14px; }
+    .specs {
+        list-style: none;
+        padding: 0;
+        border-top: 1px solid #222;
+    }
+    .specs li {
+        padding: 8px 0;
+        border-bottom: 1px solid #222;
+        font-size: 14px;
+    }
 
     .footer {
         position: fixed;
@@ -88,7 +106,7 @@
         background: #0d0d0d;
         border-top: 1px solid #222;
     }
-  </style>
+</style>
 </head>
 <body>
   <div class="sidebar" id="sidebar">
