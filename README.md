@@ -1,2 +1,2 @@
-# aobuta.github.io
-Okay
+# Aobuta
+This is a page for **aobuta.org**.
