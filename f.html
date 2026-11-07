@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青春豬頭少年系列 經典金句集 - Rascal Does Not Dream Quotes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        night: {
+                            900: '#0B0E17',
+                            800: '#121829',
+                            700: '#1D2640',
+                        },
+                        sakura: {
+                            100: '#FFF0F5',
+                            300: '#FFB7C5',
+                            400: '#FF8DA1',
+                            500: '#FF6584',
+                        },
+                        mystic: {
+                            400: '#A78BFA',
+                            500: '#8B5CF6',
+                            600: '#7C3AED',
+                        }
+                    },
+                    fontFamily: {
+                        rounded: ['"Zen Maru Gothic"', '"Noto Sans TC"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', 'Noto Sans TC', sans-serif;
+            background-color: #0B0E17;
+            color: #E2E8F0;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .glass-card {
+            background: rgba(18, 24, 41, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 101, 132, 0.15);
+        }
+
+        .glass-button {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .glass-button:hover {
+            background: rgba(255, 105, 135, 0.25);
+            border-color: rgba(255, 183, 197, 0.45);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 101, 132, 0.25);
+        }
+
+        .glass-button:active {
+            transform: translateY(0);
+        }
+
+        .eq-bar {
+            animation: eqBounce 1.2s ease-in-out infinite alternate;
+        }
+        .eq-bar:nth-child(1) { animation-delay: 0.1s; }
+        .eq-bar:nth-child(2) { animation-delay: 0.3s; }
+        .eq-bar:nth-child(3) { animation-delay: 0.5s; }
+
+        @keyframes eqBounce {
+            0% { height: 4px; }
+            100% { height: 16px; }
+        }
+
+        .quote-enter {
+            opacity: 0;
+            transform: scale(0.96) translateY(12px);
+        }
+        .quote-active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .quote-exit {
+            opacity: 0;
+            transform: scale(1.02) translateY(-12px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none !important;
+            z-index: 0;
+        }
+
+        .text-glow {
+            text-shadow: 0 2px 14px rgba(255, 183, 197, 0.3);
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 101, 132, 0.4);
+            border-radius: 10px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 101, 132, 0.7);
+        }
+    </style>
+</head>
+<body class="font-rounded selection:bg-sakura-500 selection:text-white relative min-h-screen">
+
+<canvas id="bgCanvas"></canvas>
+
+<div class="relative min-h-screen flex flex-col justify-between items-center px-4 py-6 md:py-8 z-10">
+
+    <main class="w-full max-w-4xl flex-1 flex flex-col items-center justify-center my-auto z-20">
+        
+        <div class="w-full max-w-3xl mb-6 relative z-20">
+            <div id="filterContainer" class="scroll-container w-full flex items-center justify-start gap-2 overflow-x-auto py-2.5 px-4 scrollbar-thin cursor-grab active:cursor-grabbing select-none rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 pointer-events-auto">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 bg-sakura-500 text-white shadow-md shadow-sakura-500/30 whitespace-nowrap shrink-0 pointer-events-auto" data-character="ALL">
+                    全部名句
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="梓川咲太">
+                    梓川咲太
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="櫻島麻衣">
+                    櫻島麻衣
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="古賀朋繪">
+                    古賀朋繪
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="雙葉理央">
+                    雙葉理央
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="梓川楓">
+                    梓川楓
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="牧之原翔子">
+                    牧之原翔子
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="廣川卯月">
+                    廣川卯月
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="姬路紗良">
+                    姬路紗良
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="美東美織">
+                    美東美織
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="赤城裕實">
+                    赤城裕實
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="岩見澤寧寧">
+                    岩見澤寧寧
+                </button>
+            </div>
+        </div>
+
+        <div class="relative w-full z-20">
+            <div id="progressContainer" class="w-full h-1 bg-white/10 rounded-full mb-2 overflow-hidden opacity-0 transition-opacity duration-300">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-sakura-400 to-mystic-500 w-0 transition-all duration-100 ease-linear"></div>
+            </div>
+
+            <div id="quoteCard" class="glass-card rounded-3xl p-6 md:p-10 relative overflow-hidden flex flex-col justify-between min-h-[360px] md:min-h-[400px] quote-active pointer-events-auto">
+                
+                <div class="absolute -right-10 -bottom-10 opacity-5 pointer-events-none select-none text-white text-[160px] font-black">
+                    <i class="fa-solid fa-quote-right"></i>
+                </div>
+
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center gap-3">
+                        <div id="charAvatar" class="w-12 h-12 rounded-full border-2 border-sakura-300/40 p-0.5 shadow-md overflow-hidden bg-night-800 flex items-center justify-center shrink-0">
+                            <span id="charEmoji" class="text-2xl">🐰</span>
+                        </div>
+                        <div>
+                            <h3 id="charName" class="text-lg font-bold text-white tracking-wide">櫻島麻衣</h3>
+                            <div class="flex items-center gap-2 mt-0.5">
+                                <span id="quoteArc" class="text-xs text-sakura-300 font-bold bg-sakura-500/10 px-2 py-0.5 rounded-md border border-sakura-500/20">兔女郎學姐篇</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button id="copyBtn" class="w-10 h-10 rounded-full glass-button flex items-center justify-center text-slate-300 hover:text-sakura-300 transition-colors pointer-events-auto" title="複製台詞">
+                            <i class="fa-regular fa-copy text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="my-auto py-4">
+                    <i class="fa-solid fa-quote-left text-sakura-400/40 text-2xl md:text-3xl mb-3 block"></i>
+                    <p id="quoteText" class="text-xl md:text-2xl font-bold text-slate-100 leading-relaxed md:leading-relaxed tracking-wide px-2 md:px-4 text-glow">
+                        「我比你想像的還要喜歡你。」
+                    </p>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 text-xs md:text-sm text-slate-400">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-sakura-400 shrink-0"></i>
+                        <span class="font-bold text-slate-300 shrink-0">語境：</span>
+                        <span id="quoteContext" class="text-slate-300 line-clamp-2 md:line-clamp-1">麻衣學姐對咲太傾吐隱藏極深的心意時發自肺腑的真摯告白。</span>
+                    </div>
+                    <div class="self-end md:self-auto flex items-center gap-1.5 text-slate-400 text-xs bg-white/5 px-3 py-1 rounded-full font-bold shrink-0">
+                        <i class="fa-solid fa-layer-group text-mystic-400"></i>
+                        <span id="quoteIndex">1 / 110</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-md flex items-center justify-between gap-3 mt-8 z-20 pointer-events-auto">
+            <button id="prevBtn" class="flex-1 glass-button py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm font-bold text-slate-200">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>上一句</span>
+            </button>
+
+            <button id="randomBtn" class="w-12 h-12 rounded-2xl glass-button flex items-center justify-center text-sakura-400 hover:text-white hover:bg-sakura-500/30 text-lg font-bold shadow-lg" title="隨機切換名句">
+                <i class="fa-solid fa-shuffle"></i>
+            </button>
+
+            <button id="autoPlayBtn" class="w-12 h-12 rounded-2xl glass-button flex items-center justify-center text-slate-200 hover:text-sakura-300 text-lg font-bold shadow-lg" title="自動播放">
+                <i id="autoPlayIcon" class="fa-solid fa-play text-sakura-300"></i>
+            </button>
+
+            <button id="nextBtn" class="flex-1 glass-button py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm font-bold text-slate-200">
+                <span>下一句</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+    </main>
+
+    <div id="musicPlayerUI" class="fixed bottom-4 right-4 z-30 glass-card rounded-2xl p-3 flex items-center gap-3 border border-white/15 shadow-xl max-w-xs transition-all duration-300 pointer-events-auto">
+        <button id="bgmPlayBtn" class="w-10 h-10 rounded-full bg-sakura-500 hover:bg-sakura-400 text-white flex items-center justify-center shrink-0 shadow-md shadow-sakura-500/30 transition-transform active:scale-95 pointer-events-auto">
+            <i id="bgmPlayIcon" class="fa-solid fa-play text-sm ml-0.5"></i>
+        </button>
+        
+        <div class="flex-1 min-w-0 pr-1">
+            <div class="flex items-center justify-between">
+                <h4 class="text-xs font-bold text-slate-100 truncate">Turn The World Upside Down</h4>
+                <div id="eqContainer" class="flex items-end gap-0.5 h-4 opacity-0 transition-opacity duration-300">
+                    <span class="eq-bar w-0.5 bg-sakura-400 rounded-full"></span>
+                    <span class="eq-bar w-0.5 bg-sakura-300 rounded-full"></span>
+                    <span class="eq-bar w-0.5 bg-mystic-400 rounded-full"></span>
+                </div>
+            </div>
+            <p class="text-[10px] text-slate-400 truncate">霧島透子 • OST</p>
+            
+            <div class="flex items-center gap-1.5 mt-1">
+                <button id="bgmMuteBtn" class="text-slate-400 hover:text-sakura-300 text-xs transition-colors pointer-events-auto">
+                    <i id="bgmMuteIcon" class="fa-solid fa-volume-high text-[10px]"></i>
+                </button>
+                <input id="bgmVolume" type="range" min="0" max="1" step="0.05" value="0.5" class="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-sakura-400 pointer-events-auto">
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgmAudio" loop preload="none">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=piano-moment-114876.mp3" type="audio/mpeg">
+    </audio>
+    <div id="ytPlayerHolder" class="hidden"></div>
+
+    <footer class="mt-8 text-center text-xs text-slate-400 z-20 pointer-events-auto flex flex-col items-center gap-1">
+        <p class="font-bold text-slate-300">「思春期嘛···就這樣吧。」</p>
+        <p class="text-slate-400">© 《青春豬頭少年系列》鴨志田一 / KADOKAWA | @worriments Owned</p>
+    </footer>
+
+    <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 glass-card px-5 py-2.5 rounded-full text-xs font-bold text-white flex items-center gap-2 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 border border-sakura-400/40">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-sakura-400"></i>
+        <span id="toastMsg">已複製到剪貼簿！</span>
+    </div>
+
+</div>
+
+<script>
+    const quotesData = [
+        { id: 1, character: "梓川咲太", emoji: "🐱", quote: "我並不是為了得到全人類的喜歡而出生的，只要有一個人需要我，我就能活下去。", arc: "兔女郎學姐篇", context: "咲太向麻衣表達自己的處世態度，無論世人目光如何，只要能守護重要的人就足夠。" },
+        { id: 2, character: "梓川咲太", emoji: "🐱", quote: "即使全世界都不相信你，我也會站在你這邊。", arc: "小惡魔後輩篇", context: "在朋繪面臨社交壓力與誤解時，咲太給予最堅定的支持與承諾。" },
+        { id: 3, character: "梓川咲太", emoji: "🐱", quote: "討厭別人是需要消耗大量能量的，我沒有那麼多閒暇的時間去討厭誰。", arc: "理性小魔女篇", context: "咲太面對周圍不友善傳聞時的超然態度。" },
+        { id: 4, character: "梓川咲太", emoji: "🐱", quote: "誤解就讓它誤解好了，我只在乎那些真正重要的人懂我就行。", arc: "嬌憐看家妹篇", context: "咲太對待人際關係與世俗評價的透徹體悟。" },
+        { id: 5, character: "梓川咲太", emoji: "🐱", quote: "麻衣學姐，我比你想像的還要渴望留在你的身邊。", arc: "懷夢美少女篇", context: "在面對生死抉擇時咲太對麻衣許下的深情誓言。" },
+        { id: 6, character: "梓川咲太", emoji: "🐱", quote: "我的青春，大概就是為了與你相遇而存在的吧。", arc: "大學篇", context: "咲太回顧過往青春期症候群時發出的感嘆。" },
+        { id: 7, character: "梓川咲太", emoji: "🐱", quote: "感到痛苦的時候，就算哭出來也完全沒有關係喔。", arc: "嬌憐看家妹篇", context: "咲太溫柔安慰承受極大內心壓力的妹妹楓。" },
+        { id: 8, character: "梓川咲太", emoji: "🐱", quote: "人就是因為會受傷、會迷惘，才會去尋求溫暖吧。", arc: "理性小魔女篇", context: "咲太與雙葉探討心理困境時的對話。" },
+        { id: 9, character: "梓川咲太", emoji: "🐱", quote: "只要是為了你，要我跟世界為敵幾次都無所謂。", arc: "兔女郎學姐篇", context: "咲太在全校面前向麻衣大聲喊出告白時的心聲。" },
+        { id: 10, character: "梓川咲太", emoji: "🐱", quote: "不要把別人的善意當作理所當然，但也不要害怕去接受它。", arc: "大學篇", context: "咲太作為大學生給予後輩的真摯建言。" },
+
+        { id: 11, character: "櫻島麻衣", emoji: "🐰", quote: "我比你想像的還要喜歡你。", arc: "兔女郎學姐篇", context: "麻衣學姐對咲太傾吐隱藏極深的心意時發自肺腑的真摯告白。" },
+        { id: 12, character: "櫻島麻衣", emoji: "🐰", quote: "要是敢看別的女人，我就踩你的腳哦。", arc: "嬌憐看家妹篇", context: "麻衣學姐展現獨特傲嬌醋意時的經典台詞。" },
+        { id: 13, character: "櫻島麻衣", emoji: "🐰", quote: "我才不想成為只會被你保護的女人。", arc: "懷夢美少女篇", context: "麻衣展現獨立與想要並肩作戰、守護咲太的堅決意志。" },
+        { id: 14, character: "櫻島麻衣", emoji: "🐰", quote: "咲太，謝謝你找到了我。", arc: "兔女郎學姐篇", context: "當咲太打破思春期症候群重現麻衣存在時，麻衣流下的感激之淚。" },
+        { id: 15, character: "櫻島麻衣", emoji: "🐰", quote: "即使全世界都忘了我，只要你還記得，我就依然存在。", arc: "兔女郎學姐篇", context: "麻衣面對逐漸被世人遺忘的恐懼時對咲太的依戀。" },
+        { id: 16, character: "櫻島麻衣", emoji: "🐰", quote: "笨蛋咲太，這種時候只要老實說你想我就行了。", arc: "小惡魔後輩篇", context: "麻衣在電話中體貼咲太時的溫柔對話。" },
+        { id: 17, character: "櫻島麻衣", emoji: "🐰", quote: "我的未來裡，必須要有咲太的存在才可以。", arc: "懷夢美少女篇", context: "麻衣為了咲太的生存而不惜犧牲自己的深沉之愛。" },
+        { id: 18, character: "櫻島麻衣", emoji: "🐰", quote: "演戲是我的全部，但現在，你也是我的全部了。", arc: "大學篇", context: "麻衣在事業與戀愛之間對咲太表達的心意。" },
+        { id: 19, character: "櫻島麻衣", emoji: "🐰", quote: "不要以為只有你一個人會為我擔心，我也一直在擔心著你啊。", arc: "小紅帽篇", context: "麻衣對總是獨自承擔問題的咲太表達關切。" },
+        { id: 20, character: "櫻島麻衣", emoji: "🐰", quote: "既然決定要在一起，那就做好一輩子被我管著的準備吧。", arc: "大學篇", context: "麻衣帶有甜美霸道氣息的告白。" },
+
+        { id: 21, character: "雙葉理央", emoji: "🧪", quote: "世界並不是由你一個人的心意決定的。", arc: "理性小魔女篇", context: "雙葉以理性的態度提醒咲太，不要總想著獨自承擔所有責任。" },
+        { id: 22, character: "雙葉理央", emoji: "🧪", quote: "思春期症候群——那是因為不穩定且不成熟的心靈所引起的不可思議現象。", arc: "核心概念", context: "雙葉為各種超自然現象給出的科學與心理學解釋。" },
+        { id: 23, character: "雙葉理央", emoji: "🧪", quote: "討厭自己的心情，有時候比討厭別人還要讓人難受得多。", arc: "理性小魔女篇", context: "雙葉坦承自己內心深處對自我認同的矛盾與掙扎。" },
+        { id: 24, character: "雙葉理央", emoji: "🧪", quote: "主觀的感情往往會掩蓋客觀的事實，但我還是希望你能幸福。", arc: "理性小魔女篇", context: "雙葉以理科生獨有的口吻向咲太送上祝福。" },
+        { id: 25, character: "雙葉理央", emoji: "🧪", quote: "友情這種東西，可不是用效率或者利益來計算的。", arc: "小惡魔後輩篇", context: "雙葉表達對咲太與國見這份朋友情誼的珍視。" },
+        { id: 26, character: "雙葉理央", emoji: "🧪", quote: "量子力學的觀察者效應，就像是人心對這個世界的投影一樣。", arc: "大學篇", context: "雙葉在大學研究室裡分享的哲理體悟。" },
+        { id: 27, character: "雙葉理央", emoji: "🧪", quote: "勇敢承認自己的懦弱，也是一種非常了不起的勇氣。", arc: "理性小魔女篇", context: "雙葉走出陰霾後對自我的和解與接納。" },
+        { id: 28, character: "雙葉理央", emoji: "🧪", quote: "咲太，有你這樣的朋友，其實還算不賴啦。", arc: "嬌憐看家妹篇", context: "雙葉難得展現溫柔面，向咲太表達謝意。" },
+        { id: 29, character: "雙葉理央", emoji: "🧪", quote: "有些問題就算沒有標準答案，也必須親自去尋找意義。", arc: "大學篇", context: "雙葉對學術與人生探索的看法。" },
+        { id: 30, character: "雙葉理央", emoji: "🧪", quote: "別太勉強自己了，實驗失敗了還可以重來，人心破裂了可不好修復。", arc: "懷夢美少女篇", context: "雙葉對咲太身體與心理狀況的誠懇提醒。" },
+
+        { id: 31, character: "牧之原翔子", emoji: "☂️", quote: "人生就是為了變得比昨天更溫柔一點而存在的。", arc: "懷夢美少女篇", context: "翔子小姐給予陷入迷惘中的咲太最溫暖的治癒與指引。" },
+        { id: 32, character: "牧之原翔子", emoji: "☂️", quote: "咲太君，你已經非常努力了，所以請不要再傷害你自己了。", arc: "懷夢美少女篇", context: "翔子擁抱著傷痕累累的咲太，輕聲撫平他內心的自責。" },
+        { id: 33, character: "牧之原翔子", emoji: "☂️", quote: "只要心存希望，明天的太陽就一定會比今天更加耀眼。", arc: "懷夢美少女篇", context: "國中生翔子對咲太展現的樂觀與堅強。" },
+        { id: 34, character: "牧之原翔子", emoji: "☂️", quote: "謝謝你給了我未來，咲太君。", arc: "懷夢美少女篇", context: "心臟移植成功後翔子向咲太致以最深的謝意。" },
+        { id: 35, character: "牧之原翔子", emoji: "☂️", quote: "溫柔是一種選擇，而不是一種義務。", arc: "懷夢美少女篇", context: "翔子與咲太討論「何謂真正的溫柔」時的話語。" },
+        { id: 36, character: "牧之原翔子", emoji: "☂️", quote: "請不要害怕去追求屬於你自己的幸福喔。", arc: "懷夢美少女篇", context: "翔子勸導咲太不要因為愧疚而放棄與麻衣的未來。" },
+        { id: 37, character: "牧之原翔子", emoji: "☂️", quote: "與你相遇的這段時光，是我生命中最寶貴的奇蹟。", arc: "懷夢美少女篇", context: "翔子回憶起陪伴咲太走過低谷的點點滴滴。" },
+        { id: 38, character: "牧之原翔子", emoji: "☂️", quote: "即使道路再艱難，只要一步一步向前，就一定能到達目的地。", arc: "大學篇", context: "翔子在努力康復過程中展現的韌性。" },
+        { id: 39, character: "牧之原翔子", emoji: "☂️", quote: "愛一個人，就是希望對方能夠好好的生活下去呀。", arc: "懷夢美少女篇", context: "翔子對無私之愛的詮釋。" },
+        { id: 40, character: "牧之原翔子", emoji: "☂️", quote: "祝願未來的咲太君，每天都能充滿笑容。", arc: "懷夢美少女篇", context: "翔子在留給咲太的信中寫下的美好祈願。" },
+
+        { id: 41, character: "廣川卯月", emoji: "🎤", quote: "大家都在讀空氣呢，所以我也要好好看清周圍的情況才行！", arc: "迷惘歌手篇", context: "「甜蜜子彈」隊長廣川卯月（月月）展現天然與對周遭氛圍的極度敏感。" },
+        { id: 42, character: "廣川卯月", emoji: "🎤", quote: "雖然我不太懂複雜的大道理，但只要大家能一起微笑就很開心了！", arc: "迷惘歌手篇", context: "卯月在演唱會後向粉絲與團員表達的心聲。" },
+        { id: 43, character: "廣川卯月", emoji: "🎤", quote: "讀空氣雖然很累，但如果能讓大家更融洽，那也是值得的吧？", arc: "大學篇", context: "卯月探討團體生活與同理心時的直率看法。" },
+        { id: 44, character: "廣川卯月", emoji: "🎤", quote: "偶像的工作，就是把元氣與希望傳遞給每一個孤單的人！", arc: "迷惘歌手篇", context: "卯月對自己演藝事業的熱情與信念。" },
+        { id: 45, character: "廣川卯月", emoji: "🎤", quote: "梓川前輩是個非常溫柔的人呢，總是在不知不覺中幫了大家很多忙。", arc: "大學篇", context: "卯月在大學課堂相談時對咲太的評價。" },
+        { id: 46, character: "廣川卯月", emoji: "🎤", quote: "偶爾就算不讀空氣、做最真實的自己，好像也沒有那麼可怕呢。", arc: "迷惘歌手篇", context: "卯月在克服思春期症候群後的成長體悟。" },
+        { id: 47, character: "廣川卯月", emoji: "🎤", quote: "只要舞台燈光亮起，我就要展現出最棒的自己！", arc: "迷惘歌手篇", context: "卯月登上舞台前的自我激勵。" },
+        { id: 48, character: "廣川卯月", emoji: "🎤", quote: "大家的心意我都收到了，謝謝你們一直陪伴著我！", arc: "大學篇", context: "卯月對粉絲表達無盡的謝意。" },
+        { id: 49, character: "廣川卯月", emoji: "🎤", quote: "迷茫的時候就停下腳步深呼吸吧，太陽明天依然會升起喔！", arc: "大學篇", context: "卯月安慰遇到挫折的隊友。" },
+        { id: 50, character: "廣川卯月", emoji: "🎤", quote: "我的夢想就是用歌聲，把所有人的心緊緊連在一起！", arc: "迷惘歌手篇", context: "卯月描繪憧憬的未來藍圖。" },
+
+        { id: 51, character: "姬路紗良", emoji: "📖", quote: "前輩真的非常特別呢，跟我認識的任何人都不一樣。", arc: "補習班篇", context: "咲太打工補習班的學生姬路紗良對咲太獨特性格的評價。" },
+        { id: 52, character: "姬路紗良", emoji: "📖", quote: "學習雖然很辛苦，但如果有值得尊敬的人引導，就會變得很有趣。", arc: "補習班篇", context: "紗良在課後輔導時對咲太表達的感謝。" },
+        { id: 53, character: "姬路紗良", emoji: "📖", quote: "我也想成為像櫻島麻衣前輩那樣閃耀又堅強的人！", arc: "大學篇", context: "紗良談到對麻衣學姐的崇拜與憧憬。" },
+        { id: 54, character: "姬路紗良", emoji: "📖", quote: "前輩總是能輕易看穿別人在隱瞞什麼呢，真厲害。", arc: "補習班篇", context: "紗良感嘆咲太敏銳的洞察力。" },
+        { id: 55, character: "姬路紗良", emoji: "📖", quote: "即使遇到挫折，只要想到前輩的話，就能重新振作起來。", arc: "大學篇", context: "紗良分享咲太給予的心理支持。" },
+        { id: 56, character: "姬路紗良", emoji: "📖", quote: "每個人都有屬於自己的步調，不需要急著跟別人比較吧。", arc: "補習班篇", context: "紗良對同齡人競爭壓力的坦然看法。" },
+        { id: 57, character: "姬路紗良", emoji: "📖", quote: "謝謝前輩沒有把我當成小孩子看待，而是認真聽我說話。", arc: "補習班篇", context: "紗良對咲太尊重態度表達的謝意。" },
+        { id: 58, character: "姬路紗良", emoji: "📖", quote: "未來的路雖然未知，但我會勇敢地踏出第一步的！", arc: "大學篇", context: "紗良展現對未來的期待與堅定。" },
+        { id: 59, character: "姬路紗良", emoji: "📖", quote: "能遇見咲太前輩，真是我這個夏天最幸運的事了。", arc: "補習班篇", context: "紗良在夏期講習結束時的真情告白。" },
+        { id: 60, character: "姬路紗良", emoji: "📖", quote: "請前輩也要繼續加油喔，我會一直為你應援的！", arc: "大學篇", context: "紗良為咲太的大學生活送上鼓勵。" },
+
+        { id: 61, character: "美東美織", emoji: "☕", quote: "如果不把自己真實的想法說出來，對方可是永遠都接收不到的喔。", arc: "大學篇", context: "咲太的大學同學美東美織在相談時給予的成熟與明亮建議。" },
+        { id: 62, character: "美東美織", emoji: "☕", quote: "大學生活可比想像中自由得多，但也更需要知道自己想要什麼。", arc: "大學篇", context: "美織分享對大學生活與自主選擇的見解。" },
+        { id: 63, character: "美東美織", emoji: "☕", quote: "梓川君總是露出一副看透世事的表情呢，偶爾也放鬆一下如何？", arc: "大學篇", context: "美織在咖啡廳與咲太閒聊時的幽默打趣。" },
+        { id: 64, character: "美東美織", emoji: "☕", quote: "人與人之間的距離感是很微妙的，太近會燙傷，太遠又會感到寒冷。", arc: "大學篇", context: "美織對人際互動距離的深刻觀察。" },
+        { id: 65, character: "美東美織", emoji: "☕", quote: "勇敢表達愛意並不可恥，可恥的是因為害怕受傷而選擇逃避。", arc: "大學篇", context: "美織給予身邊朋友的情感建議。" },
+        { id: 66, character: "美東美織", emoji: "☕", quote: "一杯熱咖啡的時間，就足夠讓人重新整理好混亂的心情了。", arc: "大學篇", context: "美織分享自己的減壓小秘訣。" },
+        { id: 67, character: "美東美織", emoji: "☕", quote: "你的溫柔是你的優點，但千萬別讓它變成了傷害你自己的武器。", arc: "大學篇", context: "美織關切咲太愛逞強性格時的叮嚀。" },
+        { id: 68, character: "美東美織", emoji: "☕", quote: "青春可不會因為你上了大學就結束喔，它一直在這裡。", arc: "大學篇", context: "美織對青春定義的延伸詮釋。" },
+        { id: 69, character: "美東美織", emoji: "☕", quote: "每個人心裡都有一扇門，只有願意信任的人才能拿到鑰匙。", arc: "大學篇", context: "美織探討內心世界與信任關係的對話。" },
+        { id: 70, character: "美東美織", emoji: "☕", quote: "能看到你和櫻島前輩感情這麼好，身為朋友我也替你開心呢。", arc: "大學篇", context: "美織對咲太與麻衣送上的真誠祝福。" },
+
+        { id: 71, character: "赤城裕實", emoji: "🎧", quote: "青春什麼的，說到底就是無數個衝動與遺憾交織出來的過程吧。", arc: "高中篇 / 大學篇", context: "赤城裕實以隨性、接地氣的角度看待青春期的人際互動。" },
+        { id: 72, character: "赤城裕實", emoji: "🎧", quote: "梓川你這傢伙，雖然平時看起來懶洋洋的，關鍵時刻還挺靠得住嘛。", arc: "高中篇", context: "赤城對咲太性格的坦率讚賞。" },
+        { id: 73, character: "赤城裕實", emoji: "🎧", quote: "生活本來就充滿了各種意外，順其自然反而比較輕鬆啦。", arc: "大學篇", context: "赤城分享自己的隨性生活哲學。" },
+        { id: 74, character: "赤城裕實", emoji: "🎧", quote: "能把女朋友是櫻島麻衣這件事當成日常，你這傢伙心臟真大。", arc: "高中篇", context: "赤城調侃咲太與麻衣交往時的反應。" },
+        { id: 75, character: "赤城裕實", emoji: "🎧", quote: "朋友之間哪需要那麼多客套，有困難直接說一聲不就得了。", arc: "大學篇", context: "赤城展現義氣與爽朗性格的話語。" },
+        { id: 76, character: "赤城裕實", emoji: "🎧", quote: "戴上耳機的瞬間，整個世界就只剩下屬於我自己的節奏了。", arc: "高中篇", context: "赤城分享自己喜愛音樂的原因。" },
+        { id: 77, character: "赤城裕實", emoji: "🎧", quote: "過去的事就讓它過去吧，一直回頭看可沒辦法往前走。", arc: "大學篇", context: "赤城勸慰朋友走出陰影的心態。" },
+        { id: 78, character: "赤城裕實", emoji: "🎧", quote: "偶爾去海邊吹吹風，感覺所有煩惱都被浪花帶走了呢。", arc: "高中篇", context: "赤城在湘南海岸邊發出的感嘆。" },
+        { id: 79, character: "赤城裕實", emoji: "🎧", quote: "雖然大家以後可能走向不同的道路，但這段回憶是絕對不會變的。", arc: "畢業篇", context: "赤城在畢業之際對同學們的深情告別。" },
+        { id: 80, character: "赤城裕實", emoji: "🎧", quote: "乾杯吧！為了我們依然混亂但無比真實的青春！", arc: "大學篇", context: "赤城在朋友聚會上的熱血祝酒詞。" },
+
+        { id: 81, character: "岩見澤寧寧", emoji: "🌸", quote: "每個人都有隱藏在笑容背後的秘密，只是看你願不願意去傾聽。", arc: "大學篇", context: "岩見澤寧寧探討現代人在社交場合隱藏真實自我時的話語。" },
+        { id: 82, character: "岩見澤寧寧", emoji: "🌸", quote: "溫柔如果不伴隨著理解，有時候也會變成一種無形的負擔呢。", arc: "大學篇", context: "寧寧對「溫柔」這一概念給出的深刻剖析。" },
+        { id: 83, character: "岩見澤寧寧", emoji: "🌸", quote: "梓川君比我想像中還要細心呢，難怪大家都很信任你。", arc: "大學篇", context: "寧寧觀察到咲太對周遭人的細緻關懷後的感嘆。" },
+        { id: 84, character: "岩見澤寧寧", emoji: "🌸", quote: "害怕被討厭是人的本能，但為了迎合別人而失去自我更可怕。", arc: "大學篇", context: "寧寧分享對同儕壓力與自我認同的見解。" },
+        { id: 85, character: "岩見澤寧寧", emoji: "🌸", quote: "記憶或許會隨著時間淡去，但當時感受到的溫度會永遠留在心底。", arc: "大學篇", context: "寧寧感嘆歲月流逝與情感留存的情懷。" },
+        { id: 86, character: "岩見澤寧寧", emoji: "🌸", quote: "能坦率說出『我不懂』的人，其實才是最聰明的人喔。", arc: "大學篇", context: "寧寧在圖書館與咲太交流學習時的感悟。" },
+        { id: 87, character: "岩見澤寧寧", emoji: "🌸", quote: "這個世界上沒有無緣無故的相遇，每一次交集都有它的意義。", arc: "大學篇", context: "寧寧對人與人之間緣分的唯美詮釋。" },
+        { id: 88, character: "岩見澤寧寧", emoji: "🌸", quote: "即便夜空再黑，只要有星星閃爍，就不會覺得完全孤單了。", arc: "大學篇", context: "寧寧仰望星空時吐露的治癒感言。" },
+        { id: 89, character: "岩見澤寧寧", emoji: "🌸", quote: "勇敢追求自己渴望的事物吧，不要給未來的自己留下遺憾。", arc: "大學篇", context: "寧寧送給身邊猶豫不決朋友的強心劑。" },
+        { id: 90, character: "岩見澤寧寧", emoji: "🌸", quote: "謝謝你願意聽我說這些，感覺心裡輕鬆多了呢。", arc: "大學篇", context: "寧寧在夕陽下向咲太表達的心靈釋懷。" },
+
+        { id: 91, character: "梓川楓", emoji: "🐼", quote: "哥哥給予楓的溫暖，楓一輩子都不會忘記。", arc: "嬌憐看家妹篇", context: "楓在克服社交恐懼、勇敢面對外面的世界時對咲太所說的感激之言。" },
+        { id: 92, character: "梓川楓", emoji: "🐼", quote: "楓今天也超級努力了喔！哥哥快點誇獎楓吧！", arc: "嬌憐看家妹篇", context: "楓展現可愛依賴與努力成果時的童真模樣。" },
+        { id: 93, character: "梓川楓", emoji: "🐼", quote: "只要有哥哥在身邊，外面的世界好像也沒有那麼可怕了。", arc: "嬌憐看家妹篇", context: "楓在咲太陪伴下踏出家門時的內心依靠。" },
+        { id: 94, character: "梓川楓", emoji: "🐼", quote: "楓想去學校，想看花咲公園，還想跟哥哥一起去海邊！", arc: "嬌憐看家妹篇", context: "楓在日記裡寫下的樸實而動人的願望清單。" },
+        { id: 95, character: "梓川楓", emoji: "🐼", quote: "花楓也會繼承楓的勇氣，好好生活下去的！", arc: "看家妹篇", context: "花楓融合記憶後對未來的堅定決心。" },
+        { id: 96, character: "梓川楓", emoji: "🐼", quote: "明天早上一睜開眼就能看到哥哥，是楓最幸福的事了。", arc: "嬌憐看家妹篇", context: "楓在家中對咲太流露出的深厚羈絆與依賴。" },
+        { id: 97, character: "梓川楓", emoji: "🐼", quote: "雖然會害怕被傷害，但楓還是想要親眼看看這個廣闊的世界。", arc: "嬌憐看家妹篇", context: "楓鼓起勇氣嘗試走出房間的心聲。" },
+        { id: 98, character: "梓川楓", emoji: "🐼", quote: "熊貓雖然很可愛，但哥哥在楓心裡才是最厲害的！", arc: "日常篇", context: "楓在看熊貓紀錄片時對咲太的童趣誇獎。" },
+        { id: 99, character: "梓川楓", emoji: "🐼", quote: "無論發生什麼事，楓都會一直在家裡等著哥哥回來的。", arc: "嬌憐看家妹篇", context: "楓給予咲太每日放學後最溫暖的歸屬感。" },
+        { id: 100, character: "梓川楓", emoji: "🐼", quote: "謝謝你一直以來這麼溫柔地包容著這樣的楓。", arc: "嬌憐看家妹篇", context: "楓向默默付出的咲太表達深層的感謝。" },
+
+        { id: 101, character: "古賀朋繪", emoji: "🍑", quote: "即使這是一段假的關係，但我喜歡上咲太前輩這件事，絕對不是假的！", arc: "小惡魔後輩篇", context: "朋繪在時間輪迴結束前，向咲太勇敢說出自己真實的情愫。" },
+        { id: 102, character: "古賀朋繪", emoji: "🍑", quote: "我才不想被同班同學排擠啊，讀空氣很辛苦的好不好！", arc: "小惡魔後輩篇", context: "朋繪吐露高中生為了融入圈子所承受的社交焦慮。" },
+        { id: 103, character: "古賀朋繪", emoji: "🍑", quote: "咲太前輩真的是個大笨蛋！但是···也是個超溫柔的笨蛋。", arc: "小惡魔後輩篇", context: "朋繪含著眼淚對咲太給予的最終評價。" },
+        { id: 104, character: "古賀朋繪", emoji: "🍑", quote: "未來的我可以自己決定，再也不需要靠輪迴來逃避了！", arc: "小惡魔後輩篇", context: "朋繪衝破時間循環後迎來的心理成長。" },
+        { id: 105, character: "古賀朋繪", emoji: "🍑", quote: "前輩，以後我們就做最好的普通朋友吧！", arc: "小惡魔後輩篇", context: "朋繪釋懷後與咲太重歸好友關係的燦爛笑容。" },
+        { id: 106, character: "古賀朋繪", emoji: "🍑", quote: "既然踩了我的屁股，前輩就要負起責任賠償我才行！", arc: "小惡魔後輩篇", context: "朋繪與咲太奇妙初次相遇時的逗趣對話。" },
+        { id: 107, character: "古賀朋繪", emoji: "🍑", quote: "就算我是博多出身的又怎樣，人家在努力矯正方言了啦！", arc: "小惡魔後輩篇", context: "朋繪被咲太抓包流露出博多腔時的羞惱反應。" },
+        { id: 108, character: "古賀朋繪", emoji: "🍑", quote: "只要跟前輩在一起，感覺就算被大家誤解也沒關係了。", arc: "小惡魔後輩篇", context: "朋繪在假扮女友期間感受到的安心與依賴。" },
+        { id: 109, character: "古賀朋繪", emoji: "🍑", quote: "我不想因為害怕受傷，就連明天都不敢去期待啊！", arc: "小惡魔後輩篇", context: "朋繪決定勇敢面對真實未來的感人覺悟。" },
+        { id: 110, character: "古賀朋繪", emoji: "🍑", quote: "前輩真的要好好對待麻衣學姐喔，不然我可不會原諒你！", arc: "小惡魔後輩篇", context: "朋繪退回朋友位置後送給咲太的真摯祝福。" }
+    ];
+
+    let currentFilteredQuotes = [...quotesData];
+    let currentIndex = 0;
+    let autoPlayInterval = null;
+    let isAutoPlaying = false;
+    let autoPlayTimer = 0;
+    const AUTO_PLAY_DURATION = 5500;
+
+    const quoteCard = document.getElementById('quoteCard');
+    const charName = document.getElementById('charName');
+    const charEmoji = document.getElementById('charEmoji');
+    const quoteText = document.getElementById('quoteText');
+    const quoteArc = document.getElementById('quoteArc');
+    const quoteContext = document.getElementById('quoteContext');
+    const quoteIndex = document.getElementById('quoteIndex');
+    
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const randomBtn = document.getElementById('randomBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const filterContainer = document.getElementById('filterContainer');
+
+    const autoPlayBtn = document.getElementById('autoPlayBtn');
+    const autoPlayIcon = document.getElementById('autoPlayIcon');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+
+    function renderQuote(index) {
+        if (!currentFilteredQuotes || currentFilteredQuotes.length === 0) return;
+        
+        if (index < 0) index = currentFilteredQuotes.length - 1;
+        if (index >= currentFilteredQuotes.length) index = 0;
+        currentIndex = index;
+
+        const item = currentFilteredQuotes[currentIndex];
+
+        quoteCard.classList.remove('quote-active');
+        quoteCard.classList.add('quote-exit');
+
+        setTimeout(() => {
+            charName.textContent = item.character;
+            charEmoji.textContent = item.emoji;
+            quoteText.textContent = `「${item.quote}」`;
+            quoteArc.textContent = item.arc;
+            quoteContext.textContent = item.context;
+            quoteIndex.textContent = `${currentIndex + 1} / ${currentFilteredQuotes.length}`;
+
+            quoteCard.classList.remove('quote-exit');
+            quoteCard.classList.add('quote-enter');
+
+            void quoteCard.offsetWidth;
+
+            quoteCard.classList.remove('quote-enter');
+            quoteCard.classList.add('quote-active');
+        }, 200);
+    }
+
+    function nextQuote() {
+        if (currentFilteredQuotes.length === 0) return;
+        const nextIdx = (currentIndex + 1) % currentFilteredQuotes.length;
+        renderQuote(nextIdx);
+        resetAutoPlayProgress();
+    }
+
+    function prevQuote() {
+        if (currentFilteredQuotes.length === 0) return;
+        const prevIdx = (currentIndex - 1 + currentFilteredQuotes.length) % currentFilteredQuotes.length;
+        renderQuote(prevIdx);
+        resetAutoPlayProgress();
+    }
+
+    function randomQuote() {
+        if (currentFilteredQuotes.length <= 1) return;
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * currentFilteredQuotes.length);
+        } while (randomIndex === currentIndex);
+        
+        renderQuote(randomIndex);
+        resetAutoPlayProgress();
+    }
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-sakura-500', 'text-white', 'shadow-md', 'shadow-sakura-500/30', 'font-bold');
+                b.classList.add('text-slate-300', 'font-medium');
+            });
+            btn.classList.add('bg-sakura-500', 'text-white', 'shadow-md', 'shadow-sakura-500/30', 'font-bold');
+            btn.classList.remove('text-slate-300', 'font-medium');
+
+            const charFilter = btn.getAttribute('data-character');
+
+            if (charFilter === 'ALL') {
+                currentFilteredQuotes = [...quotesData];
+            } else {
+                currentFilteredQuotes = quotesData.filter(q => q.character === charFilter);
+            }
+
+            renderQuote(0);
+            resetAutoPlayProgress();
+        });
+    });
+
+    let isMouseDown = false;
+    let startX, scrollLeftPos;
+
+    filterContainer.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        startX = e.pageX - filterContainer.offsetLeft;
+        scrollLeftPos = filterContainer.scrollLeft;
+    });
+
+    filterContainer.addEventListener('mouseleave', () => { isMouseDown = false; });
+    filterContainer.addEventListener('mouseup', () => { isMouseDown = false; });
+
+    filterContainer.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        const x = e.pageX - filterContainer.offsetLeft;
+        const walk = (x - startX) * 1.8;
+        filterContainer.scrollLeft = scrollLeftPos - walk;
+    });
+
+    filterContainer.addEventListener('wheel', (e) => {
+        if (e.deltaY !== 0) {
+            e.preventDefault();
+            filterContainer.scrollLeft += e.deltaY;
+        }
+    }, { passive: false });
+
+    copyBtn.addEventListener('click', () => {
+        const item = currentFilteredQuotes[currentIndex];
+        if (!item) return;
+        
+        const copyText = `「${item.quote}」—— ${item.character}《青春豬頭少年系列》`;
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(copyText).then(() => {
+                showToast("已成功複製台詞至剪貼簿！");
+            }).catch(() => fallbackCopy(copyText));
+        } else {
+            fallbackCopy(copyText);
+        }
+    });
+
+    function fallbackCopy(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast("已成功複製台詞至剪貼簿！");
+        } catch (err) {
+            showToast("複製失敗，請手動複製", "fa-triangle-exclamation");
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function showToast(msg, icon = "fa-circle-check") {
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        const toastIcon = document.getElementById('toastIcon');
+
+        toastMsg.textContent = msg;
+        toastIcon.className = `fa-solid ${icon} text-sakura-400`;
+
+        toast.classList.remove('opacity-0', 'pointer-events-none');
+        toast.classList.add('opacity-100');
+
+        setTimeout(() => {
+            toast.classList.remove('opacity-100');
+            toast.classList.add('opacity-0', 'pointer-events-none');
+        }, 2200);
+    }
+
+    function startAutoPlay() {
+        isAutoPlaying = true;
+        autoPlayIcon.className = "fa-solid fa-pause text-sakura-400";
+        autoPlayBtn.classList.add('border-sakura-400/50', 'bg-sakura-500/20');
+        progressContainer.classList.remove('opacity-0');
+
+        autoPlayTimer = 0;
+        clearInterval(autoPlayInterval);
+
+        autoPlayInterval = setInterval(() => {
+            autoPlayTimer += 100;
+            const progressPercent = (autoPlayTimer / AUTO_PLAY_DURATION) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+
+            if (autoPlayTimer >= AUTO_PLAY_DURATION) {
+                autoPlayTimer = 0;
+                nextQuote();
+            }
+        }, 100);
+    }
+
+    function stopAutoPlay() {
+        isAutoPlaying = false;
+        autoPlayIcon.className = "fa-solid fa-play text-sakura-300";
+        autoPlayBtn.classList.remove('border-sakura-400/50', 'bg-sakura-500/20');
+        progressContainer.classList.add('opacity-0');
+        progressBar.style.width = '0%';
+        clearInterval(autoPlayInterval);
+    }
+
+    function resetAutoPlayProgress() {
+        if (isAutoPlaying) {
+            autoPlayTimer = 0;
+            progressBar.style.width = '0%';
+        }
+    }
+
+    autoPlayBtn.addEventListener('click', () => {
+        if (isAutoPlaying) {
+            stopAutoPlay();
+        } else {
+            startAutoPlay();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextQuote();
+        if (e.key === 'ArrowLeft') prevQuote();
+        if (e.key === ' ') {
+            e.preventDefault();
+            randomQuote();
+        }
+    });
+
+    prevBtn.addEventListener('click', prevQuote);
+    nextBtn.addEventListener('click', nextQuote);
+    randomBtn.addEventListener('click', randomQuote);
+
+    const bgmAudio = document.getElementById('bgmAudio');
+    const bgmPlayBtn = document.getElementById('bgmPlayBtn');
+    const bgmPlayIcon = document.getElementById('bgmPlayIcon');
+    const bgmMuteBtn = document.getElementById('bgmMuteBtn');
+    const bgmMuteIcon = document.getElementById('bgmMuteIcon');
+    const bgmVolume = document.getElementById('bgmVolume');
+    const eqContainer = document.getElementById('eqContainer');
+
+    let isAudioPlaying = false;
+
+    bgmPlayBtn.addEventListener('click', () => {
+        if (isAudioPlaying) {
+            bgmAudio.pause();
+            bgmPlayIcon.className = "fa-solid fa-play text-sm ml-0.5";
+            eqContainer.classList.add('opacity-0');
+            isAudioPlaying = false;
+        } else {
+            bgmAudio.play().then(() => {
+                bgmPlayIcon.className = "fa-solid fa-pause text-sm";
+                eqContainer.classList.remove('opacity-0');
+                isAudioPlaying = true;
+            }).catch(() => {
+                showToast("點擊微調音量即可開啓音訊體驗！", "fa-music");
+            });
+        }
+    });
+
+    bgmVolume.addEventListener('input', (e) => {
+        const val = parseFloat(e.target.value);
+        bgmAudio.volume = val;
+        bgmAudio.muted = false;
+        updateVolumeIcon(val);
+    });
+
+    bgmMuteBtn.addEventListener('click', () => {
+        bgmAudio.muted = !bgmAudio.muted;
+        if (bgmAudio.muted) {
+            bgmMuteIcon.className = "fa-solid fa-volume-xmark text-[10px]";
+        } else {
+            updateVolumeIcon(bgmAudio.volume);
+        }
+    });
+
+    function updateVolumeIcon(vol) {
+        if (vol === 0 || bgmAudio.muted) {
+            bgmMuteIcon.className = "fa-solid fa-volume-xmark text-[10px]";
+        } else if (vol < 0.5) {
+            bgmMuteIcon.className = "fa-solid fa-volume-low text-[10px]";
+        } else {
+            bgmMuteIcon.className = "fa-solid fa-volume-high text-[10px]";
+        }
+    }
+
+    function initCanvasBackground() {
+        const canvas = document.getElementById('bgCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const stars = Array.from({ length: 70 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 1.4 + 0.4,
+            alpha: Math.random(),
+            speed: Math.random() * 0.008 + 0.003
+        }));
+
+        const petals = Array.from({ length: 26 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height - height,
+            size: Math.random() * 6 + 4,
+            speedY: Math.random() * 0.35 + 0.2,
+            speedX: Math.random() * 0.25 - 0.125,
+            angle: Math.random() * Math.PI * 2,
+            angularSpeed: Math.random() * 0.01 - 0.005,
+            color: Math.random() > 0.4 ? 'rgba(255, 183, 197, 0.6)' : 'rgba(255, 141, 161, 0.4)'
+        }));
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0.1) star.speed = -star.speed;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                ctx.fill();
+            });
+
+            petals.forEach(petal => {
+                petal.y += petal.speedY;
+                petal.x += petal.speedX + Math.sin(petal.y * 0.008) * 0.35;
+                petal.angle += petal.angularSpeed;
+
+                if (petal.y > height + 20) {
+                    petal.y = -20;
+                    petal.x = Math.random() * width;
+                }
+
+                ctx.save();
+                ctx.translate(petal.x, petal.y);
+                ctx.rotate(petal.angle);
+                
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-petal.size / 2, -petal.size, -petal.size, petal.size / 3, 0, petal.size);
+                ctx.bezierCurveTo(petal.size, petal.size / 3, petal.size / 2, -petal.size, 0, 0);
+                ctx.fillStyle = petal.color;
+                ctx.fill();
+
+                ctx.restore();
+            });
+
+            requestAnimationFrame(animateCanvas);
+        }
+
+        animateCanvas();
+    }
+
+    window.onload = function () {
+        initCanvasBackground();
+        renderQuote(0);
+    };
+</script>
+</body>
+</html>
