@@ -345,7 +345,7 @@
                 <button id="bgmMuteBtn" class="text-white/70 hover:text-white text-xs transition-colors pointer-events-auto">
                     <i id="bgmMuteIcon" class="fa-solid fa-volume-high text-[10px]"></i>
                 </button>
-                <input id="bgmVolume" type="range" min="0" max="1" step="0.05" value="0.5" class="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-white pointer-events-auto">
+                <input id="bgmVolume" type="range" min="0" max="1" step="0.05" value="0.15" class="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-white pointer-events-auto">
             </div>
         </div>
     </div>
@@ -822,6 +822,7 @@
     let isAudioPlaying = false;
 
     function playAudio() {
+        bgmAudio.volume = 0.15;
         bgmAudio.play().then(() => {
             bgmPlayIcon.className = "fa-solid fa-pause text-sm";
             eqContainer.classList.remove('opacity-0');
