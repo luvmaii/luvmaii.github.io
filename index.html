@@ -60,33 +60,59 @@
             font-family: 'Shippori Mincho', 'Noto Sans TC', serif;
             font-weight: 700;
             background-color: #0B0E17;
-            color: #E2E8F0;
+            color: #FFFFFF;
             overflow-x: hidden;
             margin: 0;
             padding: 0;
         }
 
+        #bgImageContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.8s ease-in-out;
+            z-index: -1;
+            filter: blur(15px);
+            transform: scale(1.05);
+        }
+        #bgImageContainer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(11, 14, 23, 0.45);
+        }
+
         .glass-card {
-            background: rgba(18, 24, 41, 0.78);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 101, 132, 0.15);
+            background: rgba(255, 255, 255, 0.12) !important;
+            backdrop-filter: blur(25px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
         }
 
         .glass-button {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(16px) saturate(160%) !important;
+            -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.22) !important;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         .glass-button:hover {
-            background: rgba(255, 105, 135, 0.25);
-            border-color: rgba(255, 183, 197, 0.45);
+            background: rgba(255, 255, 255, 0.22) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 101, 132, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
         }
 
         .glass-button:active {
@@ -131,7 +157,7 @@
         }
 
         .text-glow {
-            text-shadow: 0 2px 14px rgba(255, 183, 197, 0.3);
+            text-shadow: 0 2px 18px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
         .scroll-container::-webkit-scrollbar {
@@ -142,16 +168,17 @@
             border-radius: 10px;
         }
         .scroll-container::-webkit-scrollbar-thumb {
-            background: rgba(255, 101, 132, 0.4);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
         }
         .scroll-container::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 101, 132, 0.7);
+            background: rgba(255, 255, 255, 0.6);
         }
     </style>
 </head>
 <body class="font-rounded selection:bg-sakura-500 selection:text-white relative min-h-screen">
 
+<div id="bgImageContainer"></div>
 <canvas id="bgCanvas"></canvas>
 
 <div class="relative min-h-screen flex flex-col justify-between items-center px-4 py-6 md:py-8 z-10">
@@ -159,92 +186,92 @@
     <main class="w-full max-w-4xl flex-1 flex flex-col items-center justify-center my-auto z-20">
         
         <div class="w-full max-w-3xl mb-6 relative z-20">
-            <div id="filterContainer" class="scroll-container w-full flex items-center justify-start gap-2 overflow-x-auto py-2.5 px-4 scrollbar-thin cursor-grab active:cursor-grabbing select-none rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 pointer-events-auto">
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 bg-sakura-500 text-white shadow-md shadow-sakura-500/30 whitespace-nowrap shrink-0 pointer-events-auto" data-character="ALL">
+            <div id="filterContainer" class="scroll-container w-full flex items-center justify-start gap-2 overflow-x-auto py-2.5 px-4 scrollbar-thin cursor-grab active:cursor-grabbing select-none rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 pointer-events-auto shadow-xl">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 bg-white/90 text-slate-900 shadow-md whitespace-nowrap shrink-0 pointer-events-auto" data-character="ALL">
                     全部名句
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="梓川咲太">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="梓川咲太">
                     梓川咲太
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="櫻島麻衣">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="櫻島麻衣">
                     櫻島麻衣
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="古賀朋繪">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="古賀朋繪">
                     古賀朋繪
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="雙葉理央">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="雙葉理央">
                     雙葉理央
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="梓川楓">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="梓川楓">
                     梓川楓
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="牧之原翔子">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="牧之原翔子">
                     牧之原翔子
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="廣川卯月">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="廣川卯月">
                     廣川卯月
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="姬路紗良">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="姬路紗良">
                     姬路紗良
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="美東美織">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="美東美織">
                     美東美織
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="赤城裕實">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="赤城裕實">
                     赤城裕實
                 </button>
-                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="岩見澤寧寧">
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="岩見澤寧寧">
                     岩見澤寧寧
                 </button>
             </div>
         </div>
 
         <div class="relative w-full z-20">
-            <div id="progressContainer" class="w-full h-1 bg-white/10 rounded-full mb-2 overflow-hidden opacity-0 transition-opacity duration-300">
-                <div id="progressBar" class="h-full bg-gradient-to-r from-sakura-400 to-mystic-500 w-0 transition-all duration-100 ease-linear"></div>
+            <div id="progressContainer" class="w-full h-1 bg-white/15 rounded-full mb-2 overflow-hidden opacity-0 transition-opacity duration-300">
+                <div id="progressBar" class="h-full bg-white w-0 transition-all duration-100 ease-linear shadow-sm"></div>
             </div>
 
             <div id="quoteCard" class="glass-card rounded-3xl p-6 md:p-10 relative overflow-hidden flex flex-col justify-between min-h-[360px] md:min-h-[400px] quote-active pointer-events-auto">
                 
-                <div class="absolute -right-10 -bottom-10 opacity-5 pointer-events-none select-none text-white text-[160px] font-black">
+                <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none select-none text-white text-[160px] font-black">
                     <i class="fa-solid fa-quote-right"></i>
                 </div>
 
                 <div class="flex justify-between items-center mb-6">
                     <div class="flex items-center gap-3">
-                        <div id="charAvatar" class="w-12 h-12 rounded-full border-2 border-sakura-300/40 p-0.5 shadow-md overflow-hidden bg-night-800 flex items-center justify-center shrink-0">
+                        <div id="charAvatar" class="w-12 h-12 rounded-full border-2 border-white/40 p-0.5 shadow-md overflow-hidden bg-white/10 flex items-center justify-center shrink-0">
                             <img id="charAvatarImg" class="w-full h-full object-cover rounded-full" src="" alt="角色頭像">
                         </div>
                         <div>
-                            <h3 id="charName" class="text-lg font-bold text-white tracking-wide">櫻島麻衣</h3>
+                            <h3 id="charName" class="text-lg font-bold text-white tracking-wide drop-shadow">櫻島麻衣</h3>
                             <div class="flex items-center gap-2 mt-0.5">
-                                <span id="quoteArc" class="text-xs text-sakura-300 font-bold bg-sakura-500/10 px-2 py-0.5 rounded-md border border-sakura-500/20">兔女郎學姐篇</span>
+                                <span id="quoteArc" class="text-xs text-white font-bold bg-white/15 px-2.5 py-0.5 rounded-md border border-white/25 shadow-sm backdrop-blur-md">兔女郎學姐篇</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <button id="copyBtn" class="w-10 h-10 rounded-full glass-button flex items-center justify-center text-slate-300 hover:text-sakura-300 transition-colors pointer-events-auto" title="複製台詞">
+                        <button id="copyBtn" class="w-10 h-10 rounded-full glass-button flex items-center justify-center text-white hover:text-white transition-colors pointer-events-auto" title="複製台詞">
                             <i class="fa-regular fa-copy text-lg"></i>
                         </button>
                     </div>
                 </div>
 
                 <div class="my-auto py-4">
-                    <i class="fa-solid fa-quote-left text-sakura-400/40 text-2xl md:text-3xl mb-3 block"></i>
-                    <p id="quoteText" class="text-xl md:text-2xl font-bold text-slate-100 leading-relaxed md:leading-relaxed tracking-wide px-2 md:px-4 text-glow">
+                    <i class="fa-solid fa-quote-left text-white/40 text-2xl md:text-3xl mb-3 block"></i>
+                    <p id="quoteText" class="text-xl md:text-2xl font-bold text-white leading-relaxed md:leading-relaxed tracking-wide px-2 md:px-4 text-glow">
                         「我比你想像的還要喜歡你。」
                     </p>
                 </div>
 
-                <div class="mt-6 pt-4 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 text-xs md:text-sm text-slate-400">
+                <div class="mt-6 pt-4 border-t border-white/15 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 text-xs md:text-sm text-white/70">
                     <div class="flex items-center gap-2">
-                        <i class="fa-solid fa-book-open text-sakura-400 shrink-0"></i>
-                        <span class="font-bold text-slate-300 shrink-0">語境：</span>
-                        <span id="quoteContext" class="text-slate-300 line-clamp-2 md:line-clamp-1">麻衣學姐對咲太傾吐隱藏極深的心意時發自肺腑的真摯告白。</span>
+                        <i class="fa-solid fa-book-open text-white/80 shrink-0"></i>
+                        <span class="font-bold text-white shrink-0">語境：</span>
+                        <span id="quoteContext" class="text-white/80 line-clamp-2 md:line-clamp-1 drop-shadow-sm">麻衣學姐對咲太傾吐隱藏極深的心意時發自肺腑的真摯告白。</span>
                     </div>
-                    <div class="self-end md:self-auto flex items-center gap-1.5 text-slate-400 text-xs bg-white/5 px-3 py-1 rounded-full font-bold shrink-0">
-                        <i class="fa-solid fa-layer-group text-mystic-400"></i>
+                    <div class="self-end md:self-auto flex items-center gap-1.5 text-white/80 text-xs bg-white/10 border border-white/20 px-3 py-1 rounded-full font-bold shrink-0 shadow-sm">
+                        <i class="fa-solid fa-layer-group text-white"></i>
                         <span id="quoteIndex">1 / 110</span>
                     </div>
                 </div>
@@ -252,20 +279,20 @@
         </div>
 
         <div class="w-full max-w-md flex items-center justify-between gap-3 mt-8 z-20 pointer-events-auto">
-            <button id="prevBtn" class="flex-1 glass-button py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm font-bold text-slate-200">
+            <button id="prevBtn" class="flex-1 glass-button py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm font-bold text-white">
                 <i class="fa-solid fa-arrow-left"></i>
                 <span>上一句</span>
             </button>
 
-            <button id="randomBtn" class="w-12 h-12 rounded-2xl glass-button flex items-center justify-center text-sakura-400 hover:text-white hover:bg-sakura-500/30 text-lg font-bold shadow-lg" title="隨機切換名句">
+            <button id="randomBtn" class="w-12 h-12 rounded-2xl glass-button flex items-center justify-center text-white text-lg font-bold shadow-lg" title="隨機切換名句">
                 <i class="fa-solid fa-shuffle"></i>
             </button>
 
-            <button id="autoPlayBtn" class="w-12 h-12 rounded-2xl glass-button flex items-center justify-center text-slate-200 hover:text-sakura-300 text-lg font-bold shadow-lg" title="自動播放">
-                <i id="autoPlayIcon" class="fa-solid fa-play text-sakura-300"></i>
+            <button id="autoPlayBtn" class="w-12 h-12 rounded-2xl glass-button flex items-center justify-center text-white text-lg font-bold shadow-lg" title="自動播放">
+                <i id="autoPlayIcon" class="fa-solid fa-play text-white"></i>
             </button>
 
-            <button id="nextBtn" class="flex-1 glass-button py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm font-bold text-slate-200">
+            <button id="nextBtn" class="flex-1 glass-button py-3 px-4 rounded-2xl flex items-center justify-center gap-2 text-sm font-bold text-white">
                 <span>下一句</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </button>
@@ -273,27 +300,27 @@
 
     </main>
 
-    <div id="musicPlayerUI" class="fixed bottom-4 right-4 z-30 glass-card rounded-2xl p-3 flex items-center gap-3 border border-white/15 shadow-xl max-w-xs transition-all duration-300 pointer-events-auto">
-        <button id="bgmPlayBtn" class="w-10 h-10 rounded-full bg-sakura-500 hover:bg-sakura-400 text-white flex items-center justify-center shrink-0 shadow-md shadow-sakura-500/30 transition-transform active:scale-95 pointer-events-auto">
+    <div id="musicPlayerUI" class="fixed bottom-4 right-4 z-30 glass-card rounded-2xl p-3 flex items-center gap-3 border border-white/25 shadow-2xl max-w-xs transition-all duration-300 pointer-events-auto">
+        <button id="bgmPlayBtn" class="w-10 h-10 rounded-full bg-white/80 hover:bg-white text-slate-900 flex items-center justify-center shrink-0 shadow-md transition-transform active:scale-95 pointer-events-auto">
             <i id="bgmPlayIcon" class="fa-solid fa-play text-sm ml-0.5"></i>
         </button>
         
         <div class="flex-1 min-w-0 pr-1">
             <div class="flex items-center justify-between">
-                <h4 class="text-xs font-bold text-slate-100 truncate">Turn The World Upside Down</h4>
+                <h4 class="text-xs font-bold text-white truncate drop-shadow-sm">Turn The World Upside Down</h4>
                 <div id="eqContainer" class="flex items-end gap-0.5 h-4 opacity-0 transition-opacity duration-300">
-                    <span class="eq-bar w-0.5 bg-sakura-400 rounded-full"></span>
-                    <span class="eq-bar w-0.5 bg-sakura-300 rounded-full"></span>
-                    <span class="eq-bar w-0.5 bg-mystic-400 rounded-full"></span>
+                    <span class="eq-bar w-0.5 bg-white rounded-full"></span>
+                    <span class="eq-bar w-0.5 bg-white/80 rounded-full"></span>
+                    <span class="eq-bar w-0.5 bg-white/60 rounded-full"></span>
                 </div>
             </div>
-            <p class="text-[10px] text-slate-400 truncate">霧島透子 • OST</p>
+            <p class="text-[10px] text-white/70 truncate">霧島透子 • OST</p>
             
             <div class="flex items-center gap-1.5 mt-1">
-                <button id="bgmMuteBtn" class="text-slate-400 hover:text-sakura-300 text-xs transition-colors pointer-events-auto">
+                <button id="bgmMuteBtn" class="text-white/70 hover:text-white text-xs transition-colors pointer-events-auto">
                     <i id="bgmMuteIcon" class="fa-solid fa-volume-high text-[10px]"></i>
                 </button>
-                <input id="bgmVolume" type="range" min="0" max="1" step="0.05" value="0.5" class="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-sakura-400 pointer-events-auto">
+                <input id="bgmVolume" type="range" min="0" max="1" step="0.05" value="0.5" class="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-white pointer-events-auto">
             </div>
         </div>
     </div>
@@ -303,13 +330,13 @@
     </audio>
     <div id="ytPlayerHolder" class="hidden"></div>
 
-    <footer class="mt-8 text-center text-xs text-slate-400 z-20 pointer-events-auto flex flex-col items-center gap-1">
-        <p class="font-bold text-slate-300">「思春期嘛···就這樣吧。」</p>
-        <p class="text-slate-400">© 《青春豬頭少年系列》鴨志田一 / KADOKAWA | @worriments Owned</p>
+    <footer class="mt-8 text-center text-xs text-white/70 z-20 pointer-events-auto flex flex-col items-center gap-1 drop-shadow-sm">
+        <p class="font-bold text-white">「思春期嘛···就這樣吧。」</p>
+        <p class="text-white/60">© 《青春豬頭少年系列》鴨志田一 / KADOKAWA | @worriments Owned</p>
     </footer>
 
-    <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 glass-card px-5 py-2.5 rounded-full text-xs font-bold text-white flex items-center gap-2 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 border border-sakura-400/40">
-        <i id="toastIcon" class="fa-solid fa-circle-check text-sakura-400"></i>
+    <div id="toast" class="fixed top-6 left-1/2 -translate-x-1/2 glass-card px-5 py-2.5 rounded-full text-xs font-bold text-white flex items-center gap-2 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 border border-white/30">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-white"></i>
         <span id="toastMsg">已複製到剪貼簿！</span>
     </div>
 
@@ -328,6 +355,21 @@
         "岩見澤寧寧": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images/nene.png?raw=true",
         "梓川楓": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images/kaede.png?raw=true",
         "古賀朋繪": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images/koga.png?raw=true"
+    };
+
+    const charBackgrounds = {
+        "ALL": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/%E4%B8%8B%E8%BC%89%20(23).jpg?raw=true",
+        "梓川咲太": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/sakuta_bg.jpg?raw=true",
+        "櫻島麻衣": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/mai_bg.png?raw=true",
+        "古賀朋繪": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/koga_bg.jpg?raw=true",
+        "雙葉理央": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/futaba_bg.jpg?raw=true",
+        "梓川楓": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/Kaede_bg.jpg?raw=true",
+        "牧之原翔子": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/shoko_bg.png?raw=true",
+        "廣川卯月": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/uzuki_bg.png?raw=true",
+        "姬路紗良": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/himiji_bg.png?raw=true",
+        "美東美織": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/mitou_bg.jpg?raw=true",
+        "赤城裕實": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/ikumi_bg.png?raw=true",
+        "岩見澤寧寧": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/nene_bg.jpg?raw=true"
     };
 
     const quotesData = [
@@ -350,7 +392,7 @@
         { id: 16, character: "櫻島麻衣", quote: "笨蛋咲太，這種時候只要老實說你想我就行了。", arc: "小惡魔後輩篇", context: "麻衣在電話中體貼咲太時的溫柔對話。" },
         { id: 17, character: "櫻島麻衣", quote: "我的未來裡，必須要有咲太的存在才可以。", arc: "懷夢美少女篇", context: "麻衣為了咲太的生存而不惜犧牲自己的深沉之愛。" },
         { id: 18, character: "櫻島麻衣", quote: "演戲是我的全部，但現在，你也是我的全部了。", arc: "大學篇", context: "麻衣在事業與戀愛之間對咲太表達的心意。" },
-        { id: 19, character: "櫻島麻衣", quote: "不要以為只有你一個人會為我擔心，我也一直在擔心著你啊。", arc: "小紅帽篇", context: "麻衣對總是獨自承心問題的咲太表達關切。" },
+        { id: 19, character: "櫻島麻衣", quote: "不要以為只有你一個人會為我擔心，我也一直在擔心著你啊。", arc: "小紅帽篇", context: "麻衣對總是獨自承擔問題的咲太表達關切。" },
         { id: 20, character: "櫻島麻衣", quote: "既然決定要在一起，那就做好一輩子被我管著的準備吧。", arc: "大學篇", context: "麻衣帶有甜美霸道氣息的告白。" },
 
         { id: 21, character: "雙葉理央", quote: "世界並不是由你一個人的心意決定的。", arc: "理性小魔女篇", context: "雙葉以理性的態度提醒咲太，不要總想著獨自承擔所有責任。" },
@@ -441,7 +483,7 @@
         { id: 99, character: "梓川楓", quote: "無論發生什麼事，楓都會一直在家裡等著哥哥回來的。", arc: "嬌憐看家妹篇", context: "楓給予咲太每日放學後最溫暖的歸屬感。" },
         { id: 100, character: "梓川楓", quote: "謝謝你一直以來這麼溫柔地包容著這樣的楓。", arc: "嬌憐看家妹篇", context: "楓向默默付出的咲太表達深層的感謝。" },
 
-        { id: 101, character: "古賀朋繪", quote: "即使這是一段假的關係，但我喜歡上咲太前輩這件事，絕對不是假的！", arc: "小惡魔後輩篇", context: "朋繪在時間輪迴結束前，向咲太勇敢說出自己真實的情愫。" },
+        { id: 101, character: "古賀朋繪", quote: "即使這是一段假的關係，但我喜歡上咲太前輩這件事，絕對不是假的！", arc: "小惡魔後輩篇", context: "朋繪在時間輪迴結束前，向咲太勇敢說出自己真實的情態。" },
         { id: 102, character: "古賀朋繪", quote: "我才不想被同班同學排擠啊，讀空氣很辛苦的好不好！", arc: "小惡魔後輩篇", context: "朋繪吐露高中生為了融入圈子所承受的社交焦慮。" },
         { id: 103, character: "古賀朋繪", quote: "咲太前輩真的是個大笨蛋！但是···也是個超溫柔的笨蛋。", arc: "小惡魔後輩篇", context: "朋繪含著眼淚對咲太給予的最終評價。" },
         { id: 104, character: "古賀朋繪", quote: "未來的我可以自己決定，再也不需要靠輪迴來逃避了！", arc: "小惡魔後輩篇", context: "朋繪衝破時間循環後迎來的心理成長。" },
@@ -460,6 +502,7 @@
     let autoPlayTimer = 0;
     const AUTO_PLAY_DURATION = 5500;
 
+    const bgImageContainer = document.getElementById('bgImageContainer');
     const quoteCard = document.getElementById('quoteCard');
     const charName = document.getElementById('charName');
     const charAvatarImg = document.getElementById('charAvatarImg');
@@ -485,6 +528,15 @@
             const img = new Image();
             img.src = url;
         });
+        Object.values(charBackgrounds).forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
+    }
+
+    function setBackgroundForCharacter(charNameKey) {
+        const bgUrl = charBackgrounds[charNameKey] || charBackgrounds["ALL"];
+        bgImageContainer.style.backgroundImage = `url('${bgUrl}')`;
     }
 
     function renderQuote(index) {
@@ -548,13 +600,15 @@
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             filterBtns.forEach(b => {
-                b.classList.remove('bg-sakura-500', 'text-white', 'shadow-md', 'shadow-sakura-500/30', 'font-bold');
-                b.classList.add('text-slate-300', 'font-medium');
+                b.classList.remove('bg-white/90', 'text-slate-900', 'shadow-md', 'font-bold');
+                b.classList.add('text-white/70', 'font-medium');
             });
-            btn.classList.add('bg-sakura-500', 'text-white', 'shadow-md', 'shadow-sakura-500/30', 'font-bold');
-            btn.classList.remove('text-slate-300', 'font-medium');
+            btn.classList.add('bg-white/90', 'text-slate-900', 'shadow-md', 'font-bold');
+            btn.classList.remove('text-white/70', 'font-medium');
 
             const charFilter = btn.getAttribute('data-character');
+
+            setBackgroundForCharacter(charFilter);
 
             if (charFilter === 'ALL') {
                 currentFilteredQuotes = [...quotesData];
@@ -632,7 +686,7 @@
         const toastIcon = document.getElementById('toastIcon');
 
         toastMsg.textContent = msg;
-        toastIcon.className = `fa-solid ${icon} text-sakura-400`;
+        toastIcon.className = `fa-solid ${icon} text-white`;
 
         toast.classList.remove('opacity-0', 'pointer-events-none');
         toast.classList.add('opacity-100');
@@ -645,8 +699,8 @@
 
     function startAutoPlay() {
         isAutoPlaying = true;
-        autoPlayIcon.className = "fa-solid fa-pause text-sakura-400";
-        autoPlayBtn.classList.add('border-sakura-400/50', 'bg-sakura-500/20');
+        autoPlayIcon.className = "fa-solid fa-pause text-white";
+        autoPlayBtn.classList.add('border-white/60', 'bg-white/20');
         progressContainer.classList.remove('opacity-0');
 
         autoPlayTimer = 0;
@@ -666,8 +720,8 @@
 
     function stopAutoPlay() {
         isAutoPlaying = false;
-        autoPlayIcon.className = "fa-solid fa-play text-sakura-300";
-        autoPlayBtn.classList.remove('border-sakura-400/50', 'bg-sakura-500/20');
+        autoPlayIcon.className = "fa-solid fa-play text-white";
+        autoPlayBtn.classList.remove('border-white/60', 'bg-white/20');
         progressContainer.classList.add('opacity-0');
         progressBar.style.width = '0%';
         clearInterval(autoPlayInterval);
@@ -783,7 +837,7 @@
             speedX: Math.random() * 0.25 - 0.125,
             angle: Math.random() * Math.PI * 2,
             angularSpeed: Math.random() * 0.01 - 0.005,
-            color: Math.random() > 0.4 ? 'rgba(255, 183, 197, 0.6)' : 'rgba(255, 141, 161, 0.4)'
+            color: Math.random() > 0.4 ? 'rgba(255, 255, 255, 0.6)' : 'rgba(255, 230, 235, 0.4)'
         }));
 
         function animateCanvas() {
@@ -830,6 +884,7 @@
 
     window.onload = function () {
         preloadImages();
+        setBackgroundForCharacter("ALL");
         initCanvasBackground();
         renderQuote(0);
     };
