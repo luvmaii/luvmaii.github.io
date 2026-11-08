@@ -16,6 +16,22 @@
     <meta name="twitter:description" content="收錄《青春豬頭少年系列》經典台詞與心靈名句。">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/luvmaii/aobuta.github.io/main/og-image.jpg">
 
+    <!-- Preload Backgrounds & Avatars to prevent flickering -->
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/%E4%B8%8B%E8%BC%89%20(23).jpg?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/sakuta_bg.jpg?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/mai_bg.png?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/koga_bg.jpg?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/futaba_bg.jpg?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/Kaede_bg.jpg?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/shoko_bg.png?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/uzuki_bg.png?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/himiji_bg.png?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/mitou_bg.jpg?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/ikumi_bg.png?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/nene_bg.jpg?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/%E4%B8%8B%E8%BC%89%20(24).jpg?raw=true">
+    <link rel="preload" as="image" href="https://github.com/luvmaii/luvmaii.github.io/blob/main/images/Nodoka.jpg?raw=true">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,7 +82,7 @@
             padding: 0;
         }
 
-        #bgImageContainer {
+        .bg-layer {
             position: fixed;
             top: 0;
             left: 0;
@@ -75,16 +91,22 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            transition: background-image 0.8s ease-in-out;
+            transition: opacity 0.8s ease-in-out;
             z-index: -1;
             filter: blur(15px);
             transform: scale(1.05);
+            opacity: 0;
         }
-        #bgImageContainer::after {
+
+        .bg-layer::after {
             content: '';
             position: absolute;
             inset: 0;
             background: rgba(11, 14, 23, 0.45);
+        }
+
+        .bg-layer.active {
+            opacity: 1;
         }
 
         .glass-card {
@@ -178,7 +200,8 @@
 </head>
 <body class="font-rounded selection:bg-sakura-500 selection:text-white relative min-h-screen">
 
-<div id="bgImageContainer"></div>
+<div id="bgImageContainer1" class="bg-layer active"></div>
+<div id="bgImageContainer2" class="bg-layer"></div>
 <canvas id="bgCanvas"></canvas>
 
 <div class="relative min-h-screen flex flex-col justify-between items-center px-4 py-6 md:py-8 z-10">
@@ -195,6 +218,9 @@
                 </button>
                 <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="櫻島麻衣">
                     櫻島麻衣
+                </button>
+                <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="豐濱和香">
+                    豐濱和香
                 </button>
                 <button class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/15 transition-all duration-300 whitespace-nowrap shrink-0 pointer-events-auto" data-character="古賀朋繪">
                     古賀朋繪
@@ -272,7 +298,7 @@
                     </div>
                     <div class="self-end md:self-auto flex items-center gap-1.5 text-white/80 text-xs bg-white/10 border border-white/20 px-3 py-1 rounded-full font-bold shrink-0 shadow-sm">
                         <i class="fa-solid fa-layer-group text-white"></i>
-                        <span id="quoteIndex">1 / 110</span>
+                        <span id="quoteIndex">1 / 120</span>
                     </div>
                 </div>
             </div>
@@ -325,7 +351,7 @@
         </div>
     </div>
 
-    <audio id="bgmAudio" loop preload="none">
+    <audio id="bgmAudio" loop preload="auto">
         <source src="https://github.com/luvmaii/aobuta.github.io/raw/refs/heads/main/aobuta.mp3" type="audio/mpeg">
     </audio>
     <div id="ytPlayerHolder" class="hidden"></div>
@@ -354,7 +380,8 @@
         "赤城裕實": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images/ikumi.png?raw=true",
         "岩見澤寧寧": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images/nene.png?raw=true",
         "梓川楓": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images/kaede.png?raw=true",
-        "古賀朋繪": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images/koga.png?raw=true"
+        "古賀朋繪": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images/koga.png?raw=true",
+        "豐濱和香": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images/Nodoka.jpg?raw=true"
     };
 
     const charBackgrounds = {
@@ -369,7 +396,8 @@
         "姬路紗良": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/himiji_bg.png?raw=true",
         "美東美織": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/mitou_bg.jpg?raw=true",
         "赤城裕實": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/ikumi_bg.png?raw=true",
-        "岩見澤寧寧": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/nene_bg.jpg?raw=true"
+        "岩見澤寧寧": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/nene_bg.jpg?raw=true",
+        "豐濱和香": "https://github.com/luvmaii/luvmaii.github.io/blob/main/images-background/%E4%B8%8B%E8%BC%89%20(24).jpg?raw=true"
     };
 
     const quotesData = [
@@ -431,7 +459,7 @@
         { id: 51, character: "姬路紗良", quote: "前輩真的非常特別呢，跟我認識的任何人都不一樣。", arc: "補習班篇", context: "咲太打工補習班的學生姬路紗良對咲太獨特性格的評價。" },
         { id: 52, character: "姬路紗良", quote: "學習雖然很辛苦，但如果有值得尊敬的人引導，就會變得很有趣。", arc: "補習班篇", context: "紗良在課後輔導時對咲太表達的感謝。" },
         { id: 53, character: "姬路紗良", quote: "我也想成為像櫻島麻衣前輩那樣閃耀又堅強的人！", arc: "大學篇", context: "紗良談到對麻衣學姐的崇拜與憧憬。" },
-        { id: 54, character: "姬路紗良", quote: "前輩總是能輕易看穿別人在隱瞞什麼呢，真厲害。", arc: "補習班篇", context: "紗良感嘆咲太敏銳的洞察力。" },
+        { id: 54, character: "姬路紗良", quote: "前輩總是能輕易看穿別人在隱照什麼呢，真厲害。", arc: "補習班篇", context: "紗良感嘆咲太敏銳的洞察力。" },
         { id: 55, character: "姬路紗良", quote: "即使遇到挫折，只要想到前輩的話，就能重新振作起來。", arc: "大學篇", context: "紗良分享咲太給予的心理支持。" },
         { id: 56, character: "姬路紗良", quote: "每個人都有屬於自己的步調，不需要急著跟別人比較吧。", arc: "補習班篇", context: "紗良對同齡人競爭壓力的坦然看法。" },
         { id: 57, character: "姬路紗良", quote: "謝謝前輩沒有把我當成小孩子看待，而是認真聽我說話。", arc: "補習班篇", context: "紗良對咲太尊重態度表達的謝意。" },
@@ -492,7 +520,18 @@
         { id: 107, character: "古賀朋繪", quote: "就算我是博多出身的又怎樣，人家在努力矯正方言了啦！", arc: "小惡魔後輩篇", context: "朋繪被咲太抓包流露出博多腔時的羞惱反應。" },
         { id: 108, character: "古賀朋繪", quote: "只要跟前輩在一起，感覺就算被大家誤解也沒關係了。", arc: "小惡魔後輩篇", context: "朋繪在假扮女友期間感受到的安心與依賴。" },
         { id: 109, character: "古賀朋繪", quote: "我不想因為害怕受傷，就連明天都不敢去期待啊！", arc: "小惡魔後輩篇", context: "朋繪決定勇敢面對真實未來的感人覺悟。" },
-        { id: 110, character: "古賀朋繪", quote: "前輩真的要好好對待麻衣學姐喔，不然我可不會原諒你！", arc: "小惡魔後輩篇", context: "朋繪退回朋友位置後送給咲太的真摯祝福。" }
+        { id: 110, character: "古賀朋繪", quote: "前輩真的要好好對待麻衣學姐喔，不然我可不會原諒你！", arc: "小惡魔後輩篇", context: "朋繪退回朋友位置後送給咲太的真摯祝福。" },
+
+        { id: 111, character: "豐濱和香", quote: "我最喜歡姐姐了！在這個世界上，我最崇拜的人就是姐姐！", arc: "小小偶像篇", context: "和香表達自己對同父異母姐姐櫻島麻衣極度深厚的崇拜與愛戴。" },
+        { id: 112, character: "豐濱和香", quote: "為什麼姐姐總是能做得那麼完美，而我卻總是讓媽媽失望呢？", arc: "小小偶像篇", context: "和香在與麻衣交換身體後，吐露長期活在姐姐陰影與母親期待下的壓迫感。" },
+        { id: 113, character: "豐濱和香", quote: "咲太這個大變態！要是敢對姐姐做出什麼不禮貌的事，我絕對不會放過你！", arc: "小小偶像篇", context: "和香對咲太展現的標誌性警惕與傲嬌護姐語氣。" },
+        { id: 114, character: "豐濱和香", quote: "我會用我自己的方式努力，總有一天要成為能讓姐姐認可的偶像！", arc: "小小偶像篇", context: "和香克服思春期症候群後，找到了專屬於自己的奮鬥目標與自我認同。" },
+        { id: 115, character: "豐濱和香", quote: "『甜蜜子彈』的大家都是我重要的夥伴，我不會拖大家的後腿！", arc: "小小偶像篇", context: "和香作為偶像團體的一員，展現出堅強與負責任的團隊榮譽感。" },
+        { id: 116, character: "豐濱和香", quote: "就算再怎麼模仿姐姐，我也無法成為櫻島麻衣……所以我只要做豐濱和香就好了！", arc: "小小偶像篇", context: "和香終於明白不需要盲目模仿他人，接納最真實的自己。" },
+        { id: 117, character: "豐濱和香", quote: "姐姐在舞台上閃閃發光的樣子，一直是我咬牙堅持下去的動力。", arc: "小小偶像篇", context: "和香坦言麻衣在她偶像生涯中起到的心靈支柱作用。" },
+        { id: 118, character: "豐濱和香", quote: "雖然咲太平時看起來很不靠譜，但謝謝你……這次真的幫了我很大忙。", arc: "小小偶像篇", context: "和香在解決身體交換事件後，向咲太表達難得的誠摯謝意。" },
+        { id: 119, character: "豐濱和香", quote: "站在舞台上看到大家的笑容時，我才第一次覺得努力是有意義的！", arc: "迷惘歌手篇", context: "和香在偶像演唱會成功後感受到的幸福與成就感。" },
+        { id: 120, character: "豐濱和香", quote: "我才沒有在嫉妒呢！我只是……我也很想成為對姐姐來說不可或缺的存在啊。", arc: "大學篇", context: "和香流露出內心渴望得到麻衣重視與寵愛的嬌嗔感受。" }
     ];
 
     let currentFilteredQuotes = [...quotesData];
@@ -502,7 +541,10 @@
     let autoPlayTimer = 0;
     const AUTO_PLAY_DURATION = 5500;
 
-    const bgImageContainer = document.getElementById('bgImageContainer');
+    const bgImageContainer1 = document.getElementById('bgImageContainer1');
+    const bgImageContainer2 = document.getElementById('bgImageContainer2');
+    let activeBgIndex = 1;
+
     const quoteCard = document.getElementById('quoteCard');
     const charName = document.getElementById('charName');
     const charAvatarImg = document.getElementById('charAvatarImg');
@@ -536,7 +578,22 @@
 
     function setBackgroundForCharacter(charNameKey) {
         const bgUrl = charBackgrounds[charNameKey] || charBackgrounds["ALL"];
-        bgImageContainer.style.backgroundImage = `url('${bgUrl}')`;
+        
+        const currentActive = activeBgIndex === 1 ? bgImageContainer1 : bgImageContainer2;
+        const currentInactive = activeBgIndex === 1 ? bgImageContainer2 : bgImageContainer1;
+
+        if (currentActive.style.backgroundImage.includes(encodeURI(bgUrl)) || currentActive.style.backgroundImage.includes(bgUrl)) {
+            return;
+        }
+
+        const tempImg = new Image();
+        tempImg.onload = () => {
+            currentInactive.style.backgroundImage = `url('${bgUrl}')`;
+            currentInactive.classList.add('active');
+            currentActive.classList.remove('active');
+            activeBgIndex = activeBgIndex === 1 ? 2 : 1;
+        };
+        tempImg.src = bgUrl;
     }
 
     function renderQuote(index) {
@@ -765,6 +822,29 @@
 
     let isAudioPlaying = false;
 
+    function playAudio() {
+        bgmAudio.play().then(() => {
+            bgmPlayIcon.className = "fa-solid fa-pause text-sm";
+            eqContainer.classList.remove('opacity-0');
+            isAudioPlaying = true;
+        }).catch(() => {
+            isAudioPlaying = false;
+            const handleFirstInteraction = () => {
+                if (!isAudioPlaying) {
+                    bgmAudio.play().then(() => {
+                        bgmPlayIcon.className = "fa-solid fa-pause text-sm";
+                        eqContainer.classList.remove('opacity-0');
+                        isAudioPlaying = true;
+                    }).catch(() => {});
+                }
+                document.removeEventListener('click', handleFirstInteraction);
+                document.removeEventListener('keydown', handleFirstInteraction);
+            };
+            document.addEventListener('click', handleFirstInteraction);
+            document.addEventListener('keydown', handleFirstInteraction);
+        });
+    }
+
     bgmPlayBtn.addEventListener('click', () => {
         if (isAudioPlaying) {
             bgmAudio.pause();
@@ -772,13 +852,7 @@
             eqContainer.classList.add('opacity-0');
             isAudioPlaying = false;
         } else {
-            bgmAudio.play().then(() => {
-                bgmPlayIcon.className = "fa-solid fa-pause text-sm";
-                eqContainer.classList.remove('opacity-0');
-                isAudioPlaying = true;
-            }).catch(() => {
-                showToast("點擊微調音量即可開啓音訊體驗！", "fa-music");
-            });
+            playAudio();
         }
     });
 
@@ -884,9 +958,10 @@
 
     window.onload = function () {
         preloadImages();
-        setBackgroundForCharacter("ALL");
+        bgImageContainer1.style.backgroundImage = `url('${charBackgrounds["ALL"]}')`;
         initCanvasBackground();
         renderQuote(0);
+        playAudio();
     };
 </script>
 </body>
